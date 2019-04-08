@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS_Orchestrator", "AR_Aging_Loop\SSIS_Orchestrator.dtproj", "{4628902C-5FB7-4B39-A3F2-9780FC2EEBAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4628902C-5FB7-4B39-A3F2-9780FC2EEBAE}.Development|Default.ActiveCfg = Development
+		{4628902C-5FB7-4B39-A3F2-9780FC2EEBAE}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61CB5510-130D-4172-BE81-9D76F834B822}
+	EndGlobalSection
+EndGlobal

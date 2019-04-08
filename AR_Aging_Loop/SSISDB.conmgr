@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="SSISDB"
+  DTS:DTSID="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="InitialCatalog">@[$Project::SSISDB_InitialCatalog]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::SSISDB_Password]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::SSISDB_ServerName]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::SSISDB_UserName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=HSCUSEA2WSDSSIS;User ID=HarscoAdmin;Initial Catalog=SSISDB;Integrated Security=True;Application Name=SSIS-ProductionPackages-{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}HSCUSEA2WSDSSIS.SSISDB;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1"
+        p4:Salt="RsWg9Pob6Q=="
+        p4:IV="YDDC4xT0nG0=" xmlns:p4="www.microsoft.com/SqlServer/SSIS">YYviHgDiajpMtWHt9gEsPj7cJ6kIrVWljNCYDDnEgVYpS5lfGXACMPhzao8i+uxChMts0Zzu0tys4odhY97ekxUDkJj0ax6Yo+OvwMXgnHoDbehXRDc2q9DAvpbpBKQSK14E92+BMYG7uGU7xSMQTc9MNq1clQAFjUd5/ONafQk=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

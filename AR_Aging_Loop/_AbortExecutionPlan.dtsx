@@ -1,0 +1,473 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/18/2018 12:36:04 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="METLUDUDLT23039"
+  DTS:CreatorName="HARSCO\jbernier"
+  DTS:DTSID="{03A8CA2E-1449-4E21-A0F7-11947C616D76}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="_AbortExecutionPlan"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{5F712A8A-ADE8-42EB-A075-B34660D2C207}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:Description="Name of Execution Plan to abort"
+      DTS:DTSID="{0082DF64-663B-4A8B-ADCE-23738B78712D}"
+      DTS:ObjectName="P_ExecutionPlanName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">AR_Aging</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:Description="Do you want to remove the execution plan from the queue? (Yes/No)"
+      DTS:DTSID="{143EA4FB-CA89-4FD3-9AFA-34A7E70AB361}"
+      DTS:ObjectName="P_RemoveJobQueue">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Yes</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{133EE617-9C69-4F21-8D2F-3EE5EC81E210}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExecutionID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{34AFB22B-F15E-4ADE-B48C-A2B531284082}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExecutionPlanStatus">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{837C2BA5-4886-47C0-B253-C8A4A3064548}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExecutionPlanStatusCustom">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CC2BE290-AD62-4D9D-838F-A2064BF8CB9B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;exec [catalog].[stop_operation] &quot; +  (DT_STR, 10, 1252)@[User::ExecutionID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLAbortExecution">
+      <DTS:VariableValue
+        DTS:DataType="8">exec [catalog].[stop_operation] 0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ECF6BD20-95DE-4F37-B54B-FDBD4B88B8FB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;SELECT &#xA;     CASE catalog.executions.status&#xA;               WHEN 1 THEN 'Created' &#xA;               WHEN 2 THEN 'Running' &#xA;               WHEN 3 THEN 'Canceled' &#xA;               WHEN 4 THEN 'Failed' &#xA;               WHEN 5 THEN 'Pending' &#xA;               WHEN 6 THEN 'Ended unexpectedly' &#xA;               WHEN 7 THEN 'Succeeded' &#xA;               WHEN 8 THEN 'Stopping' &#xA;               WHEN 9 THEN 'Completed' &#xA;     END StatusDescription,&#xA;&#x9;execution_id,&#xA;&#x9;CurrentRuns.Status StatusCustom&#xA;FROM   catalog.executions&#xA;inner join orchestrator.CurrentRuns on&#xA;&#x9;&#x9;MasterPackageExecID = execution_id&#xA;where ExecutionPlanName = '&quot; +  @[$Package::P_ExecutionPlanName] +&quot;'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLGetStatus">
+      <DTS:VariableValue
+        DTS:DataType="8">
+SELECT 
+     CASE catalog.executions.status
+               WHEN 1 THEN 'Created' 
+               WHEN 2 THEN 'Running' 
+               WHEN 3 THEN 'Canceled' 
+               WHEN 4 THEN 'Failed' 
+               WHEN 5 THEN 'Pending' 
+               WHEN 6 THEN 'Ended unexpectedly' 
+               WHEN 7 THEN 'Succeeded' 
+               WHEN 8 THEN 'Stopping' 
+               WHEN 9 THEN 'Completed' 
+     END StatusDescription,
+	execution_id,
+	CurrentRuns.Status StatusCustom
+FROM   catalog.executions
+inner join orchestrator.CurrentRuns on
+		MasterPackageExecID = execution_id
+where ExecutionPlanName = 'AR_Aging'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{19CA7619-8990-4BAB-92A0-60359C6FA3A5}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot; &#xA;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA; &quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLMoveToJobHistory">
+      <DTS:VariableValue
+        DTS:DataType="8"> 
+INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
+DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
+
+INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
+DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
+ </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E7109667-FFD0-4F51-B4A5-E44CFEEF8A0E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;UPDATE Orchestrator.CurrentRuns&#xA;SET Status ='Aborted',&#xA;&#x9;StatusDescription = 'Aborted',&#xA;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Aborted',&#xA;&#x9;StatusDescription = 'Aborted',&#xA;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLUpdateStatus">
+      <DTS:VariableValue
+        DTS:DataType="8">
+UPDATE Orchestrator.CurrentRuns
+SET Status ='Aborted',
+	StatusDescription = 'Aborted',
+	EndTime = GETUTCDATE(),
+	Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
+WHERE ExecutionPlanName = 'AR_Aging'
+
+UPDATE Orchestrator.CurrentRunsDetails
+SET Status ='Aborted',
+	StatusDescription = 'Aborted',
+	EndTime = GETUTCDATE(),
+	Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
+WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'AR_Aging'
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Abort Execution Plan"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Abort Execution Plan"
+      DTS:DTSID="{CDE312D1-E4F0-4B9E-B94D-79B715CB17D9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Abort Execution Plan"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQLAbortExecution" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Execution Plan Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Get Execution Plan Status"
+      DTS:DTSID="{C896C8E5-C239-4DCF-9290-3941452EAE5B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Execution Plan Status"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQLGetStatus"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ExecutionPlanStatus" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::ExecutionID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="2"
+            SQLTask:DtsVariableName="User::ExecutionPlanStatusCustom" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Move to Job History"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Move to Job History"
+      DTS:DTSID="{BDD50C24-5971-49CF-8099-D4831D106A1F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Move to Job History"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQLMoveToJobHistory" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Update Status"
+      DTS:DTSID="{22EA7F2F-7082-4577-B3E9-B2CDA9A02BAB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Status"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQLUpdateStatus" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Wait"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Wait"
+      DTS:DTSID="{BF0D1A89-7D2A-4112-860D-8BC1B8129BCF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Wait"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:SqlStatementSource="WAITFOR DELAY '00:00:15'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D22EAB5E-50CF-4028-90F1-0E178BBAA97E}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::ExecutionPlanStatus] == &quot;Running&quot;"
+      DTS:From="Package\Get Execution Plan Status"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Abort Execution Plan" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0985E62B-F98E-4D11-AABB-B635289D07CC}"
+      DTS:EvalOp="3"
+      DTS:Expression="(&#xA;@[User::ExecutionPlanStatus]  == &quot;Canceled&quot; ||&#xA;&#xA;@[User::ExecutionPlanStatus]  == &quot;Failed&quot; ||&#xA;&#xA;@[User::ExecutionPlanStatus]  == &quot;Ended unexpectedly&quot;&#xA; || &#xA;&#xA;@[User::ExecutionPlanStatusCustom]  == &quot;Failed&quot;&#xA;)"
+      DTS:From="Package\Get Execution Plan Status"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Status" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{9AB9A73C-F171-400B-9E36-68CA3BB26349}"
+      DTS:From="Package\Abort Execution Plan"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Wait" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B55F5ED8-6181-4625-B20F-0812728DA7A8}"
+      DTS:From="Package\Wait"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update Status" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{4572247D-8740-4BC0-BAD6-2A2A5C7204E8}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_RemoveJobQueue] ==&quot;Yes&quot;"
+      DTS:From="Package\Update Status"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Move to Job History" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Abort Execution Plan"
+          TopLeft="390,214" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Get Execution Plan Status"
+          TopLeft="518,81" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Move to Job History"
+          TopLeft="531,501" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Update Status"
+          TopLeft="538,387" />
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Wait"
+          TopLeft="433,292" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="586.666666666667,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-107.166666666667,91"
+              Start="0,0"
+              End="-107.166666666667,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8290766208251" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.8290766208251"
+                    Point2="0,36.8290766208251"
+                    Point3="-4,36.8290766208251" />
+                  <mssgle:LineSegment
+                    End="-103.166666666667,36.8290766208251" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.166666666667,36.8290766208251"
+                    Point2="-107.166666666667,36.8290766208251"
+                    Point3="-107.166666666667,40.8290766208251" />
+                  <mssgle:LineSegment
+                    End="-107.166666666667,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-61.5833333333333,41.8290766208251,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="649,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,264"
+              Start="0,0"
+              End="0,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,120.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="481.75,256">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="484,334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="110.333333333333,53"
+              Start="0,0"
+              End="110.333333333333,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.4945978391356" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.4945978391356"
+                    Point2="0,31.4945978391356"
+                    Point3="4,31.4945978391356" />
+                  <mssgle:LineSegment
+                    End="106.333333333333,31.4945978391356" />
+                  <mssgle:CubicBezierSegment
+                    Point1="106.333333333333,31.4945978391356"
+                    Point2="110.333333333333,31.4945978391356"
+                    Point3="110.333333333333,35.4945978391357" />
+                  <mssgle:LineSegment
+                    End="110.333333333333,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="619.25,429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72"
+              Start="0,0"
+              End="0,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,24.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

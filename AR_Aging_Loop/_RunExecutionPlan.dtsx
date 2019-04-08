@@ -1,0 +1,2323 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2013"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SSISJoost"
+  DTS:CreatorName="SSISJoost"
+  DTS:Description="http://microsoft-ssis.blogspot.com/"
+  DTS:DTSID="{05B30AA5-C503-4D78-B692-F14AB0CDC199}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1043"
+  DTS:MaxConcurrentExecutables="10"
+  DTS:ObjectName="_RunExecutionPlan"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="141"
+  DTS:VersionComments="example package"
+  DTS:VersionGUID="{0D3D4D99-F572-4821-9315-41A5FD6747DC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:Description="Name of Execution Plan to execute"
+      DTS:DTSID="{B0BC7FE6-D407-4732-AEB6-71AC8DA6900D}"
+      DTS:ObjectName="P_ExecutionPlanName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">AR_Aging</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:Description="FULL or INCR"
+      DTS:DTSID="{457339CD-2356-49DC-B9DB-A2073FDD0344}"
+      DTS:ObjectName="P_LoadType">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">FULL</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Number of packages executed at the same time (Max10)"
+      DTS:DTSID="{1E5DD290-FBA8-416E-B91F-5D4B1E32C76D}"
+      DTS:ObjectName="P_ParallelProcesses"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">10</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B890AF11-666A-4719-A498-A047364776BF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CHKGoExec">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5BF85A11-3A3A-4E3A-8873-CDA9D34290C3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CHKIncompleteExecPlan">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B75E8388-4AB2-4DBE-82E1-DCEB6ECF8D9A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue01">
+      <DTS:VariableValue
+        DTS:DataType="8">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8AA756A8-10D6-488E-9383-C23C0C8AD7E5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue02">
+      <DTS:VariableValue
+        DTS:DataType="8">2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F0F45394-AC3A-4576-BE67-8B31842368D7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue03">
+      <DTS:VariableValue
+        DTS:DataType="8">3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0B086346-101E-47FF-97AB-442C4AD53F9C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue04">
+      <DTS:VariableValue
+        DTS:DataType="8">4</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{68661011-14D1-41BB-9166-5A325A05AD35}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue05">
+      <DTS:VariableValue
+        DTS:DataType="8">5</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{34F2D8C3-E6D5-43C1-ACEB-9D30FB2570BF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue06">
+      <DTS:VariableValue
+        DTS:DataType="8">6</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{24C78272-827D-4250-90F5-9B77B0D47E56}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue07">
+      <DTS:VariableValue
+        DTS:DataType="8">7</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0555D6AE-18F3-46C3-87D6-EBD1EAB44520}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue08">
+      <DTS:VariableValue
+        DTS:DataType="8">8</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{49C10351-E834-42C0-9692-9B41816A7436}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue09">
+      <DTS:VariableValue
+        DTS:DataType="8">9</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AAFC74DD-BF49-421F-A3DD-E4923E8E7EFD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JobQueue10">
+      <DTS:VariableValue
+        DTS:DataType="8">10</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7F7D130C-A5A7-409E-A92C-DAB6E60963C8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result01">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DB72A1F9-E386-49E9-A6B1-15D673F122EB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result02">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F88281E7-82E9-409F-800C-8D5662B0581F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result03">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A9CD9435-1BBE-4D04-870D-4CB758CD2772}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result04">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{44CB29FD-77EB-45C7-A760-7615BB3BFE00}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result05">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{89B8C7CB-41BB-48FA-B04D-352BC4C6D124}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result06">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C9B36734-8012-4D7A-9D86-4CCF54A2BCCB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result07">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A4C72862-7F92-4C84-917C-EA8E061F5723}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result08">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{95B90BAF-ED93-473B-A871-A10543E6C9D0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result09">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE7791C4-2CFD-435E-9063-921C1FF744CC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Result10">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{08315AB5-5216-46B0-9DF2-509C46513FD3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT count(*) FROM Orchestrator.CurrentRunsDetails &#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLCheckIncompleteExecPlan">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT count(*) FROM Orchestrator.CurrentRunsDetails 
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67801832-7DA8-49A6-B0B2-09BE1EEFE12A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;UPDATE Orchestrator.CurrentRuns&#xA;SET Status ='Failed',&#xA;StatusDescription = 'MasterPackage Failed',&#xA;EndTime = GETUTCDATE(),&#xA;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;WHERE ExecutionPlanName = '&quot;+  @[$Package::P_ExecutionPlanName] +&quot;' and &#xA;MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot; &#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Aborted',&#xA;&#x9;StatusDescription = 'Other tasks have failed'&#xA;WHERE Status not in ('Completed','Failed') and&#xA;ExecutionPlanName = '&quot;+  @[$Package::P_ExecutionPlanName] +&quot;' and &#xA;MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLFailPackage">
+      <DTS:VariableValue
+        DTS:DataType="8">
+UPDATE Orchestrator.CurrentRuns
+SET Status ='Failed',
+StatusDescription = 'MasterPackage Failed',
+EndTime = GETUTCDATE(),
+Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
+WHERE ExecutionPlanName = 'AR_Aging' and 
+MasterPackageExecID = 0 
+
+UPDATE Orchestrator.CurrentRunsDetails
+SET Status ='Aborted',
+	StatusDescription = 'Other tasks have failed'
+WHERE Status not in ('Completed','Failed') and
+ExecutionPlanName = 'AR_Aging' and 
+MasterPackageExecID = 0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6CD7214B-0F69-423F-9E38-98A05D75DAB9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Exec [Orchestrator].[FillJobQueue] '&quot; + @[$Package::P_ExecutionPlanName] + &quot;',&quot; +&#xA;(DT_STR,10,1252)@[System::ServerExecutionID] + &#xA;&quot;,'&quot; +  @[$Package::P_LoadType] +&quot;'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLFillQueue">
+      <DTS:VariableValue
+        DTS:DataType="8">Exec [Orchestrator].[FillJobQueue] 'AR_Aging',0,'FULL'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{559C9A19-F5D7-4280-9AAD-E583B533A2CF}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;DECLARE @FailureCount int = 0&#xA;DECLARE @IncompleteCount int = 0&#xA;DECLARE @Status varchar(20)&#xA;DECLARE @StatusDescription varchar(100)&#xA;&#xA;SET @FailureCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;SET @IncompleteCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;&#xA;IF @FailureCount != 0&#xA;  BEGIN&#xA;&#x9;SET @Status = 'Failed'&#xA;&#x9;SET @StatusDescription = 'At least one task has failed'&#xA;  END&#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 &#xA;  BEGIN&#xA;&#x9;SET @Status = 'Aborted'&#xA;&#x9;SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'&#xA;  END&#xA;ELSE&#xA;&#xA;  &#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount = 0 &#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status ='Completed',&#xA;&#x9;&#x9;&#x9;StatusDescription = 'Completed',&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;ELSE&#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription,&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription&#xA;&#x9;&#x9;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;  &#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLMoveToJobHistory">
+      <DTS:VariableValue
+        DTS:DataType="8">
+DECLARE @FailureCount int = 0
+DECLARE @IncompleteCount int = 0
+DECLARE @Status varchar(20)
+DECLARE @StatusDescription varchar(100)
+
+SET @FailureCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = 'AR_Aging')
+SET @IncompleteCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'AR_Aging')
+
+IF @FailureCount != 0
+  BEGIN
+	SET @Status = 'Failed'
+	SET @StatusDescription = 'At least one task has failed'
+  END
+  
+IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 
+  BEGIN
+	SET @Status = 'Aborted'
+	SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'
+  END
+ELSE
+
+  
+  
+IF @FailureCount = 0 AND @IncompleteCount = 0 
+  BEGIN
+		UPDATE Orchestrator.CurrentRuns
+		SET Status ='Completed',
+			StatusDescription = 'Completed',
+			EndTime = GETUTCDATE(),
+			Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
+		WHERE ExecutionPlanName = 'AR_Aging'
+		
+		INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
+		DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
+		
+		INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
+		DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
+  END
+ELSE
+  BEGIN
+		UPDATE Orchestrator.CurrentRuns
+		SET Status =@Status,
+			StatusDescription = @StatusDescription,
+			EndTime = GETUTCDATE(),
+			Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
+		WHERE ExecutionPlanName = 'AR_Aging'
+		
+		UPDATE Orchestrator.CurrentRunsDetails
+		SET Status =@Status,
+			StatusDescription = @StatusDescription
+		WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'AR_Aging'
+  END
+  
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0E585066-FA33-430C-9CC1-DD496378FADC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;UPDATE Orchestrator.CurrentRuns&#xA;SET Status ='Running',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot;,&#xA;&#x9;&#x9;StartTime = GETUTCDATE(),&#xA;&#x9;&#x9;EndTime = NULL,&#xA;&#x9;&#x9;RunCount = RunCount + 1&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Queued',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot; ,&#xA;&#x9;StartTime = NULL,&#xA;&#x9;EndTime = NULL&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLReSubmitQueue">
+      <DTS:VariableValue
+        DTS:DataType="8">
+UPDATE Orchestrator.CurrentRuns
+SET Status ='Running',
+        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',
+        MasterPackageExecID = 0,
+		StartTime = GETUTCDATE(),
+		EndTime = NULL,
+		RunCount = RunCount + 1
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
+
+UPDATE Orchestrator.CurrentRunsDetails
+SET Status ='Queued',
+        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',
+        MasterPackageExecID = 0 ,
+	StartTime = NULL,
+	EndTime = NULL
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
+
+
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End of Queues"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E8937179-A51C-4714-95A3-F1283B497810}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End of Queues">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\End of Queues\SQL - Move to JobHistory"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8137FA9F-2543-42BD-B09E-CC8DFB643526}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Move to JobHistory"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQLMoveToJobHistory" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 1"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{65420A22-E3B7-49BE-9BE3-FA193B515BAA}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 1">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 1\RunJobQueue 1"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{517284BB-8E69-45D3-8879-04B8ECD875BE}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 1"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue01"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 10"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{2054557c-b406-4b8d-9d8a-5bbb7481e309}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 10">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 10\RunJobQueue 10"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{92e3d52b-2f09-40f2-ac03-db37c9146fda}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 10"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="9">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue10"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 2"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{96862675-633A-43CF-85D7-8D210137DE9F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 2">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 2\RunJobQueue 2"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{4f83bdc1-6293-43e7-9e1f-a86295c29b03}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 2"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue02"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 3"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{4539B7B4-B215-408D-8028-1084BCF6B217}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 3">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 3\RunJobQueue 3"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{9cc8f797-255c-4e09-91d6-c461574830d0}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 3"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="4">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue03"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 4"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{2F215E6E-F293-4282-98F8-1E82BFF67809}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 4">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 4\RunJobQueue 4"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{0721aa6c-d63b-4a0e-986a-e07c947dd036}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 4"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue04"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 5"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{A5FA9978-52AD-43A6-A2F3-1B90012CB219}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 5">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 5\RunJobQueue 5"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{cd152941-8137-464e-b7c4-59def183d3e8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 5"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue05"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 6"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{0257a71c-6d80-4866-abf3-1de57373ee23}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 6">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 6\RunJobQueue 6"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{32edf0e7-817f-4fbc-ac7e-34413cf071ae}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 6"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="5">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue06"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 7"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{24ff9409-89f3-4bae-9955-b65db472ce19}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 7">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 7\RunJobQueue 7"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{87e3d068-1a03-44a5-a490-9b16469923a6}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 7"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="6">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue07"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 8"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{89ead211-e3cf-49eb-90d4-617304b25527}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 8">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 8\RunJobQueue 8"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{a8c27196-0c5d-4911-beb2-2b06e92acef8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 8"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="7">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue08"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue 9"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="ExecutionLine"
+      DTS:DTSID="{7a2b2f48-b322-4da5-be61-2522090f551a}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="Queue 9">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue 9\RunJobQueue 9"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Get first package from queue"
+          DTS:DTSID="{c3384162-4217-415d-a67f-91cbab4e6fc4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="RunJobQueue 9"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="8">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[RunJobQueue]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="QueueNumber"
+                SQLTask:DtsVariableName="User::JobQueue09"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionID"
+                SQLTask:DtsVariableName="System::ServerExecutionID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Queue Building"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{122935A3-C2E6-4CE5-9456-5057CE55A35E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Queue Building">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Queue Building\SQL - Check for incomplete Execution Plan"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ab841048-9c28-490e-b963-8764c4e720b3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Check for incomplete Execution Plan"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQLCheckIncompleteExecPlan"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::CHKIncompleteExecPlan" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Queue Building\SQL - Fill Queue"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Fill the package queue"
+          DTS:DTSID="{52cea474-1228-42dd-8501-8e20984ad5c7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="1033"
+          DTS:ObjectName="SQL - Fill Queue"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQLFillQueue" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Queue Building\SQL - Incremental Check"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7BC6675F-F5AE-4575-83B1-A6F29B2DEE9D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Incremental Check"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="[Orchestrator].[IncrementalCheck]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="ExecutionPlanName"
+                SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="LoadType"
+                SQLTask:DtsVariableName="$Package::P_LoadType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Queue Building\SQL - ReSubmit Queue"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b4c1dd72-4c92-4da0-948b-6ce00139b565}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - ReSubmit Queue"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQLReSubmitQueue" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Queue Building.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{d6b2d7af-96a8-4668-8253-9fdeafd7e9ad}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::CHKIncompleteExecPlan] != 0"
+          DTS:From="Package\Queue Building\SQL - Check for incomplete Execution Plan"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Queue Building\SQL - ReSubmit Queue" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Queue Building.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{0BF00CC6-E22A-4902-A4A3-DB100EE14CFA}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::CHKIncompleteExecPlan] == 0"
+          DTS:From="Package\Queue Building\SQL - Check for incomplete Execution Plan"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Queue Building\SQL - Incremental Check" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Queue Building.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{D647C9C0-8FEB-471C-BDD5-D0409C821A4F}"
+          DTS:From="Package\Queue Building\SQL - Incremental Check"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Queue Building\SQL - Fill Queue" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - ExecutionPlan currently running?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2c27bfcf-8cc5-4a19-8675-8ff4beb4884a}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - ExecutionPlan currently running?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+          SQLTask:IsStoredProc="True"
+          SQLTask:SqlStatementSource="[Orchestrator].[CheckJobQueue]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::CHKGoExec" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="ExecutionPlanName"
+            SQLTask:DtsVariableName="$Package::P_ExecutionPlanName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="16"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5ED98C33-E3EC-48D8-95CF-43A49B755159}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 1"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Queue 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3488093D-794A-45E0-8147-EE7B2C2A9280}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 2"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Queue 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{489029AB-3958-42D4-A69F-F2E854926334}"
+      DTS:From="Package\Queue 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{AE1C543A-DBC0-43E7-A8DF-40F01B82A770}"
+      DTS:From="Package\Queue 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{1B0BDC57-0C28-4F21-A22E-399C37FBD11D}"
+      DTS:From="Package\Queue 3"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 13]"
+      DTS:CreationName=""
+      DTS:DTSID="{9B1042DD-0543-4EC0-998D-999A3BA5ECC7}"
+      DTS:From="Package\Queue 4"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 13"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 14]"
+      DTS:CreationName=""
+      DTS:DTSID="{66281778-580B-48F7-9324-DB7CD4F96B6F}"
+      DTS:From="Package\Queue 5"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 14"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 15]"
+      DTS:CreationName=""
+      DTS:DTSID="{4590150E-6751-4563-9DC1-AD4DD7BF6653}"
+      DTS:From="Package\Queue 6"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 15"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 16]"
+      DTS:CreationName=""
+      DTS:DTSID="{406550D1-F4CD-4269-85A0-3EF406DDDF0A}"
+      DTS:From="Package\Queue 7"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 16"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 17]"
+      DTS:CreationName=""
+      DTS:DTSID="{ED32ECC7-5B87-4484-9DD2-BBC8DA602230}"
+      DTS:From="Package\Queue 8"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 17"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 18]"
+      DTS:CreationName=""
+      DTS:DTSID="{BCCA5690-6D0B-444C-AF69-DF718B651FDF}"
+      DTS:From="Package\Queue 9"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 18"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 19]"
+      DTS:CreationName=""
+      DTS:DTSID="{B9DD7245-F530-4D65-B014-18D9A523D299}"
+      DTS:From="Package\Queue 10"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 19"
+      DTS:To="Package\End of Queues" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{315B4D36-5EE7-4783-8232-3C7DD7F6198A}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 3"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Queue 3" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 20]"
+      DTS:CreationName=""
+      DTS:DTSID="{BFC26415-E89F-4E02-B5A5-065F5DB50DD0}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::CHKGoExec] == 1"
+      DTS:From="Package\SQL - ExecutionPlan currently running?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 20"
+      DTS:To="Package\Queue Building" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{9DA5B306-4F62-4EC1-9797-9AB92AC808E7}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 4"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Queue 4" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{958A26C0-7CC2-4756-AC24-0805E4C98E7D}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 5"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Queue 5" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{16886E92-1254-44D4-8EBA-1EAB1716AB12}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 6"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Queue 6" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{8E02A1BB-C2EE-4AE7-BA39-D6FE72C1D962}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 7"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Queue 7" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{283431E2-89F2-4EF7-9748-B7B9A2BEB1F4}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 8"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Queue 8" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C5A71AE-6AEC-4B8C-85A0-05D3382C7F44}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 9"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Queue 9" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{7BC7506D-B505-444B-8486-338C9A3A9015}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 10"
+      DTS:From="Package\Queue Building"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Queue 10" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{6E99C000-9B9F-44F6-B960-81E9F833FF40}"
+      DTS:EventID="1994"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{DC4F8AE1-70B6-4C7B-80BE-1F312E4A5E88}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\SQL - Fail the entire ExecutionPLan"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{da42abfe-fdba-41e8-8b7b-9c80a8e4d21c}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Fail the entire ExecutionPLan">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FCC88301-D7F5-446F-B4D6-F79AEB60AFC0}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQLFailPackage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="200,42"
+          Id="Package\End of Queues\SQL - Move to JobHistory"
+          TopLeft="15,28" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="262,125"
+          Size="262,168"
+          Id="Package\End of Queues"
+          TopLeft="810.5,1016" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 1\RunJobQueue 1"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 1"
+          TopLeft="43.590909090909,752.5" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Queue 10\RunJobQueue 10"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 10"
+          TopLeft="1698.59090909091,753.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 2\RunJobQueue 2"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 2"
+          TopLeft="227.215909090909,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 3\RunJobQueue 3"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 3"
+          TopLeft="410.84090909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 4\RunJobQueue 4"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 4"
+          TopLeft="594.46590909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 5\RunJobQueue 5"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 5"
+          TopLeft="778.09090909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 6\RunJobQueue 6"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 6"
+          TopLeft="961.71590909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 7\RunJobQueue 7"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 7"
+          TopLeft="1145.34090909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 8\RunJobQueue 8"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 8"
+          TopLeft="1328.96590909091,752.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Queue 9\RunJobQueue 9"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 9"
+          TopLeft="1512.59090909091,752.5" />
+        <NodeLayout
+          Size="281,42"
+          Id="Package\Queue Building\SQL - Check for incomplete Execution Plan"
+          TopLeft="205.5,44" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Queue Building\SQL - Fill Queue"
+          TopLeft="394.5,263.5" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Queue Building\SQL - Incremental Check"
+          TopLeft="376,172" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Queue Building\SQL - ReSubmit Queue"
+          TopLeft="167.5,167" />
+        <EdgeLayout
+          Id="Package\Queue Building.PrecedenceConstraints[Constraint]"
+          TopLeft="300.5,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-50.5,81"
+              Start="0,0"
+              End="-50.5,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.6751592356688" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.6751592356688"
+                    Point2="0,32.6751592356688"
+                    Point3="-4,32.6751592356688" />
+                  <mssgle:LineSegment
+                    End="-46.5,32.6751592356688" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-46.5,32.6751592356688"
+                    Point2="-50.5,32.6751592356688"
+                    Point3="-50.5,36.6751592356688" />
+                  <mssgle:LineSegment
+                    End="-50.5,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-33.25,37.6751592356688,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Queue Building.PrecedenceConstraints[Constraint 1]"
+          TopLeft="391.5,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.5,86"
+              Start="0,0"
+              End="83.5,78.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.692144373673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.692144373673"
+                    Point2="0,34.692144373673"
+                    Point3="4,34.692144373673" />
+                  <mssgle:LineSegment
+                    End="79.5,34.692144373673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="79.5,34.692144373673"
+                    Point2="83.5,34.692144373673"
+                    Point3="83.5,38.692144373673" />
+                  <mssgle:LineSegment
+                    End="83.5,78.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="33.75,39.692144373673,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Queue Building.PrecedenceConstraints[Constraint 2]"
+          TopLeft="474,214">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.5"
+              Start="0,0"
+              End="0,42">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Incomplete ExecutionPlan"
+          ParentId="Package\Queue Building"
+          FontInfo="{assembly:Null}"
+          Size="167,42"
+          Id="7f89a3e5-2390-4d07-b864-137036fde4ee"
+          TopLeft="81,101" />
+        <AnnotationLayout
+          Text="ExecutionPlan not in Queue"
+          ParentId="Package\Queue Building"
+          FontInfo="{assembly:Null}"
+          Size="177,42"
+          Id="ff2a70d9-7726-4df8-bb56-67c490768aad"
+          TopLeft="461,100" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="722,352"
+          Size="722,395"
+          Id="Package\Queue Building"
+          TopLeft="582,228" />
+        <NodeLayout
+          Size="265,42"
+          Id="Package\SQL - ExecutionPlan currently running?"
+          TopLeft="811,115.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="650.909090909091,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-521.318181818182,129.5"
+              Start="0,0"
+              End="-521.318181818182,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7572425459928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.7572425459928"
+                    Point2="0,20.7572425459928"
+                    Point3="-4,20.7572425459928" />
+                  <mssgle:LineSegment
+                    End="-517.318181818182,20.7572425459928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-517.318181818182,20.7572425459928"
+                    Point2="-521.318181818182,20.7572425459928"
+                    Point3="-521.318181818182,24.7572425459928" />
+                  <mssgle:LineSegment
+                    End="-521.318181818182,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-268.659090909091,25.7572425459928,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="715.818181818182,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-402.602272727273,129.5"
+              Start="0,0"
+              End="-402.602272727273,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.0218629432298"
+                    Point2="0,35.0218629432298"
+                    Point3="-4,35.0218629432298" />
+                  <mssgle:LineSegment
+                    End="-398.602272727273,35.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-398.602272727273,35.0218629432298"
+                    Point2="-402.602272727273,35.0218629432298"
+                    Point3="-402.602272727273,39.0218629432298" />
+                  <mssgle:LineSegment
+                    End="-402.602272727273,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-209.301136363636,40.0218629432298,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="129.590909090909,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="708,118.5"
+              Start="0,0"
+              End="708,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,94.1935020126509" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,94.1935020126509"
+                    Point2="0,98.1935020126509"
+                    Point3="4,98.1935020126509" />
+                  <mssgle:LineSegment
+                    End="704,98.1935020126509" />
+                  <mssgle:CubicBezierSegment
+                    Point1="704,98.1935020126509"
+                    Point2="708,98.1935020126509"
+                    Point3="708,102.193502012651" />
+                  <mssgle:LineSegment
+                    End="708,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="313.215909090909,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="547.465909090909,118.5"
+              Start="0,0"
+              End="547.465909090909,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.6791269443051" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,81.6791269443051"
+                    Point2="0,85.6791269443051"
+                    Point3="4,85.6791269443051" />
+                  <mssgle:LineSegment
+                    End="543.465909090909,85.6791269443051" />
+                  <mssgle:CubicBezierSegment
+                    Point1="543.465909090909,85.6791269443051"
+                    Point2="547.465909090909,85.6791269443051"
+                    Point3="547.465909090909,89.6791269443051" />
+                  <mssgle:LineSegment
+                    End="547.465909090909,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="496.84090909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="386.931818181817,118.5"
+              Start="0,0"
+              End="386.931818181817,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.9939919893191" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,71.9939919893191"
+                    Point2="0,75.9939919893191"
+                    Point3="4,75.9939919893191" />
+                  <mssgle:LineSegment
+                    End="382.931818181817,75.9939919893191" />
+                  <mssgle:CubicBezierSegment
+                    Point1="382.931818181817,75.9939919893191"
+                    Point2="386.931818181817,75.9939919893191"
+                    Point3="386.931818181817,79.9939919893191" />
+                  <mssgle:LineSegment
+                    End="386.931818181817,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 13]"
+          TopLeft="680.46590909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="226.397727272726,118.5"
+              Start="0,0"
+              End="226.397727272726,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.2760895641743" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,64.2760895641743"
+                    Point2="0,68.2760895641743"
+                    Point3="4,68.2760895641743" />
+                  <mssgle:LineSegment
+                    End="222.397727272726,68.2760895641743" />
+                  <mssgle:CubicBezierSegment
+                    Point1="222.397727272726,68.2760895641743"
+                    Point2="226.397727272726,68.2760895641743"
+                    Point3="226.397727272726,72.2760895641743" />
+                  <mssgle:LineSegment
+                    End="226.397727272726,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 14]"
+          TopLeft="864.09090909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.8636363636355,118.5"
+              Start="0,0"
+              End="65.8636363636355,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.9813067150635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.9813067150635"
+                    Point2="0,61.9813067150635"
+                    Point3="4,61.9813067150635" />
+                  <mssgle:LineSegment
+                    End="61.8636363636355,61.9813067150635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="61.8636363636355,61.9813067150635"
+                    Point2="65.8636363636355,61.9813067150635"
+                    Point3="65.8636363636355,65.9813067150635" />
+                  <mssgle:LineSegment
+                    End="65.8636363636355,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 15]"
+          TopLeft="1047.71590909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-94.6704545454554,118.5"
+              Start="0,0"
+              End="-94.6704545454554,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.9813067150635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.9813067150635"
+                    Point2="0,61.9813067150635"
+                    Point3="-4,61.9813067150635" />
+                  <mssgle:LineSegment
+                    End="-90.6704545454554,61.9813067150635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-90.6704545454554,61.9813067150635"
+                    Point2="-94.6704545454554,61.9813067150635"
+                    Point3="-94.6704545454554,65.9813067150635" />
+                  <mssgle:LineSegment
+                    End="-94.6704545454554,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 16]"
+          TopLeft="1231.34090909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-255.204545454546,118.5"
+              Start="0,0"
+              End="-255.204545454546,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.2760895641743" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,64.2760895641743"
+                    Point2="0,68.2760895641743"
+                    Point3="-4,68.2760895641743" />
+                  <mssgle:LineSegment
+                    End="-251.204545454546,68.2760895641743" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-251.204545454546,68.2760895641743"
+                    Point2="-255.204545454546,68.2760895641743"
+                    Point3="-255.204545454546,72.2760895641743" />
+                  <mssgle:LineSegment
+                    End="-255.204545454546,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 17]"
+          TopLeft="1414.96590909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-415.738636363637,118.5"
+              Start="0,0"
+              End="-415.738636363637,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.9939919893191" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,71.9939919893191"
+                    Point2="0,75.9939919893191"
+                    Point3="-4,75.9939919893191" />
+                  <mssgle:LineSegment
+                    End="-411.738636363637,75.9939919893191" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-411.738636363637,75.9939919893191"
+                    Point2="-415.738636363637,75.9939919893191"
+                    Point3="-415.738636363637,79.9939919893191" />
+                  <mssgle:LineSegment
+                    End="-415.738636363637,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 18]"
+          TopLeft="1598.59090909091,897.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-576.272727272728,118.5"
+              Start="0,0"
+              End="-576.272727272728,111">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.6791269443051" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,81.6791269443051"
+                    Point2="0,85.6791269443051"
+                    Point3="-4,85.6791269443051" />
+                  <mssgle:LineSegment
+                    End="-572.272727272728,85.6791269443051" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-572.272727272728,85.6791269443051"
+                    Point2="-576.272727272728,85.6791269443051"
+                    Point3="-576.272727272728,89.6791269443051" />
+                  <mssgle:LineSegment
+                    End="-576.272727272728,111" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 19]"
+          TopLeft="1784.59090909091,898.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-739.181818181819,117.5"
+              Start="0,0"
+              End="-739.181818181819,110">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,93.3648648648649" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,93.3648648648649"
+                    Point2="0,97.3648648648649"
+                    Point3="-4,97.3648648648649" />
+                  <mssgle:LineSegment
+                    End="-735.181818181819,97.3648648648649" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-735.181818181819,97.3648648648649"
+                    Point2="-739.181818181819,97.3648648648649"
+                    Point3="-739.181818181819,101.364864864865" />
+                  <mssgle:LineSegment
+                    End="-739.181818181819,110" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="780.727272727273,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-283.886363636363,129.5"
+              Start="0,0"
+              End="-283.886363636363,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.9780737372097"
+                    Point2="0,45.9780737372097"
+                    Point3="-4,45.9780737372097" />
+                  <mssgle:LineSegment
+                    End="-279.886363636363,45.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-279.886363636363,45.9780737372097"
+                    Point2="-283.886363636363,45.9780737372097"
+                    Point3="-283.886363636363,49.9780737372097" />
+                  <mssgle:LineSegment
+                    End="-283.886363636363,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-149.943181818181,50.9780737372097,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 20]"
+          TopLeft="943.25,157.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.5"
+              Start="0,0"
+              End="0,63">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,23.5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="845.636363636364,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-165.170454545454,129.5"
+              Start="0,0"
+              End="-165.170454545454,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.6572551302576"
+                    Point2="0,54.6572551302576"
+                    Point3="-4,54.6572551302576" />
+                  <mssgle:LineSegment
+                    End="-161.170454545454,54.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-161.170454545454,54.6572551302576"
+                    Point2="-165.170454545454,54.6572551302576"
+                    Point3="-165.170454545454,58.6572551302576" />
+                  <mssgle:LineSegment
+                    End="-165.170454545454,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-90.5852272727268,59.6572551302576,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="910.545454545455,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-46.4545454545445,129.5"
+              Start="0,0"
+              End="-46.4545454545445,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.7024390243902"
+                    Point2="0,61.7024390243902"
+                    Point3="-4,61.7024390243902" />
+                  <mssgle:LineSegment
+                    End="-42.4545454545445,61.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-42.4545454545445,61.7024390243902"
+                    Point2="-46.4545454545445,61.7024390243902"
+                    Point3="-46.4545454545445,65.7024390243902" />
+                  <mssgle:LineSegment
+                    End="-46.4545454545445,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.2272727272722,66.7024390243902,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="975.454545454546,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.2613636363644,129.5"
+              Start="0,0"
+              End="72.2613636363644,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.7024390243902"
+                    Point2="0,61.7024390243902"
+                    Point3="4,61.7024390243902" />
+                  <mssgle:LineSegment
+                    End="68.2613636363644,61.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.2613636363644,61.7024390243902"
+                    Point2="72.2613636363644,61.7024390243902"
+                    Point3="72.2613636363644,65.7024390243902" />
+                  <mssgle:LineSegment
+                    End="72.2613636363644,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.1306818181822,66.7024390243902,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1040.36363636364,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190.977272727273,129.5"
+              Start="0,0"
+              End="190.977272727273,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.6572551302576"
+                    Point2="0,54.6572551302576"
+                    Point3="4,54.6572551302576" />
+                  <mssgle:LineSegment
+                    End="186.977272727273,54.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="186.977272727273,54.6572551302576"
+                    Point2="190.977272727273,54.6572551302576"
+                    Point3="190.977272727273,58.6572551302576" />
+                  <mssgle:LineSegment
+                    End="190.977272727273,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="87.4886363636367,59.6572551302576,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="1105.27272727273,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="309.693181818183,129.5"
+              Start="0,0"
+              End="309.693181818183,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.9780737372097"
+                    Point2="0,45.9780737372097"
+                    Point3="4,45.9780737372097" />
+                  <mssgle:LineSegment
+                    End="305.693181818183,45.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="305.693181818183,45.9780737372097"
+                    Point2="309.693181818183,45.9780737372097"
+                    Point3="309.693181818183,49.9780737372097" />
+                  <mssgle:LineSegment
+                    End="309.693181818183,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="146.846590909091,50.9780737372097,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="1170.18181818182,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="428.409090909092,129.5"
+              Start="0,0"
+              End="428.409090909092,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.0218629432298"
+                    Point2="0,35.0218629432298"
+                    Point3="4,35.0218629432298" />
+                  <mssgle:LineSegment
+                    End="424.409090909092,35.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="424.409090909092,35.0218629432298"
+                    Point2="428.409090909092,35.0218629432298"
+                    Point3="428.409090909092,39.0218629432298" />
+                  <mssgle:LineSegment
+                    End="428.409090909092,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="206.204545454546,40.0218629432298,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="1235.09090909091,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="549.500000000001,130.5"
+              Start="0,0"
+              End="549.500000000001,123">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.9175301332206" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.9175301332206"
+                    Point2="0,20.9175301332206"
+                    Point3="4,20.9175301332206" />
+                  <mssgle:LineSegment
+                    End="545.500000000001,20.9175301332206" />
+                  <mssgle:CubicBezierSegment
+                    Point1="545.500000000001,20.9175301332206"
+                    Point2="549.500000000001,20.9175301332206"
+                    Point3="549.500000000001,24.9175301332206" />
+                  <mssgle:LineSegment
+                    End="549.500000000001,123" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="266.75,25.9175301332206,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="To extend the number of parallel process, you need to&#xA;copy the last Sequence Container a couple&#xA;of times and make sure to replace variable5&#xA;by variableX in all expressions and parameters."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="318,90"
+          Id="26e6084f-f9c8-4e26-9e27-4a359b41d00b"
+          TopLeft="1818.59090909091,567" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="247,42"
+          Id="Package.EventHandlers[OnError]\SQL - Fail the entire ExecutionPLan"
+          TopLeft="470,78" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
