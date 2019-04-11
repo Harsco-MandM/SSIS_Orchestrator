@@ -14,9 +14,9 @@
   DTS:ObjectName="_RunExecutionPlan"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="141"
+  DTS:VersionBuild="142"
   DTS:VersionComments="example package"
-  DTS:VersionGUID="{0D3D4D99-F572-4821-9315-41A5FD6747DC}">
+  DTS:VersionGUID="{363F0D84-F0AE-4EB2-8EBE-71EF20D96D06}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -28,7 +28,7 @@
       DTS:ObjectName="P_ExecutionPlanName">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">AR_Aging</DTS:Property>
+        DTS:Name="ParameterValue">StagingJDE</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -261,7 +261,7 @@
       DTS:ObjectName="SQLCheckIncompleteExecPlan">
       <DTS:VariableValue
         DTS:DataType="8">SELECT count(*) FROM Orchestrator.CurrentRunsDetails 
-WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'</DTS:VariableValue>
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -278,14 +278,14 @@ SET Status ='Failed',
 StatusDescription = 'MasterPackage Failed',
 EndTime = GETUTCDATE(),
 Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
-WHERE ExecutionPlanName = 'AR_Aging' and 
+WHERE ExecutionPlanName = 'StagingJDE' and 
 MasterPackageExecID = 0 
 
 UPDATE Orchestrator.CurrentRunsDetails
 SET Status ='Aborted',
 	StatusDescription = 'Other tasks have failed'
 WHERE Status not in ('Completed','Failed') and
-ExecutionPlanName = 'AR_Aging' and 
+ExecutionPlanName = 'StagingJDE' and 
 MasterPackageExecID = 0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
@@ -297,7 +297,7 @@ MasterPackageExecID = 0</DTS:VariableValue>
       DTS:Namespace="User"
       DTS:ObjectName="SQLFillQueue">
       <DTS:VariableValue
-        DTS:DataType="8">Exec [Orchestrator].[FillJobQueue] 'AR_Aging',0,'FULL'</DTS:VariableValue>
+        DTS:DataType="8">Exec [Orchestrator].[FillJobQueue] 'StagingJDE',0,'FULL'</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -314,8 +314,8 @@ DECLARE @IncompleteCount int = 0
 DECLARE @Status varchar(20)
 DECLARE @StatusDescription varchar(100)
 
-SET @FailureCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = 'AR_Aging')
-SET @IncompleteCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'AR_Aging')
+SET @FailureCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = 'StagingJDE')
+SET @IncompleteCount = 	(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'StagingJDE')
 
 IF @FailureCount != 0
   BEGIN
@@ -339,13 +339,13 @@ IF @FailureCount = 0 AND @IncompleteCount = 0
 			StatusDescription = 'Completed',
 			EndTime = GETUTCDATE(),
 			Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
-		WHERE ExecutionPlanName = 'AR_Aging'
+		WHERE ExecutionPlanName = 'StagingJDE'
 		
-		INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
-		DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'AR_Aging'
+		INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'StagingJDE'
+		DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = 'StagingJDE'
 		
-		INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
-		DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'AR_Aging'
+		INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'StagingJDE'
+		DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = 'StagingJDE'
   END
 ELSE
   BEGIN
@@ -354,12 +354,12 @@ ELSE
 			StatusDescription = @StatusDescription,
 			EndTime = GETUTCDATE(),
 			Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())
-		WHERE ExecutionPlanName = 'AR_Aging'
+		WHERE ExecutionPlanName = 'StagingJDE'
 		
 		UPDATE Orchestrator.CurrentRunsDetails
 		SET Status =@Status,
 			StatusDescription = @StatusDescription
-		WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'AR_Aging'
+		WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'StagingJDE'
   END
   
 </DTS:VariableValue>
@@ -381,7 +381,7 @@ SET Status ='Running',
 		StartTime = GETUTCDATE(),
 		EndTime = NULL,
 		RunCount = RunCount + 1
-WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
 
 UPDATE Orchestrator.CurrentRunsDetails
 SET Status ='Queued',
@@ -389,7 +389,7 @@ SET Status ='Queued',
         MasterPackageExecID = 0 ,
 	StartTime = NULL,
 	EndTime = NULL
-WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
 
 
 </DTS:VariableValue>
@@ -444,7 +444,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 1"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -542,7 +542,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 2"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -591,7 +591,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 3"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -689,7 +689,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'AR_Aging'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 5"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
