@@ -8,15 +8,15 @@
   DTS:Description="http://microsoft-ssis.blogspot.com/"
   DTS:DTSID="{05B30AA5-C503-4D78-B692-F14AB0CDC199}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.121"
+  DTS:LastModifiedProductVersion="15.0.2000.128"
   DTS:LocaleID="1043"
   DTS:MaxConcurrentExecutables="20"
   DTS:ObjectName="_RunExecutionPlan"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="148"
+  DTS:VersionBuild="150"
   DTS:VersionComments="example package"
-  DTS:VersionGUID="{5CD79631-8E8A-4A98-9B89-637CA65F56FF}">
+  DTS:VersionGUID="{143B53D0-4C0A-4691-B1E0-7E9CECF62C3C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -39,17 +39,6 @@
       <DTS:Property
         DTS:DataType="8"
         DTS:Name="ParameterValue">INCR</DTS:Property>
-    </DTS:PackageParameter>
-    <DTS:PackageParameter
-      DTS:CreationName=""
-      DTS:DataType="3"
-      DTS:Description="Number of packages executed at the same time (Max20)"
-      DTS:DTSID="{1E5DD290-FBA8-416E-B91F-5D4B1E32C76D}"
-      DTS:ObjectName="P_ParallelProcesses"
-      DTS:Required="True">
-      <DTS:Property
-        DTS:DataType="3"
-        DTS:Name="ParameterValue">20</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
@@ -534,7 +523,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 1"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="10">
+          DTS:ThreadHint="8">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -583,7 +572,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 10"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -632,7 +621,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 11"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="17">
+          DTS:ThreadHint="14">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -681,7 +670,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 12"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="11">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -730,7 +719,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 13"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="18">
+          DTS:ThreadHint="12">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -779,7 +768,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 14"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="16">
+          DTS:ThreadHint="18">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -828,7 +817,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 15"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="19">
+          DTS:ThreadHint="16">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -877,7 +866,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 16"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="15">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -926,7 +915,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 17"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="17">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -975,7 +964,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 18"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="13">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1024,7 +1013,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 19"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="19">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1073,7 +1062,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 2"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="11">
+          DTS:ThreadHint="7">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1122,7 +1111,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 20"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="15">
+          DTS:ThreadHint="10">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1171,7 +1160,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 3"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="9">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1220,7 +1209,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 4"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="8">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1269,7 +1258,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 5"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1318,7 +1307,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 6"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="9">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1367,7 +1356,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 7"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="12">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1416,7 +1405,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 8"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="13">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1465,7 +1454,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 9"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="14">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1658,8 +1647,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{5ED98C33-E3EC-48D8-95CF-43A49B755159}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 1"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1668,8 +1655,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{3488093D-794A-45E0-8147-EE7B2C2A9280}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 2"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -1678,7 +1663,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
       DTS:CreationName=""
       DTS:DTSID="{489029AB-3958-42D4-A69F-F2E854926334}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;1"
       DTS:From="Package\Queue 1"
       DTS:LogicalAnd="True"
@@ -1688,7 +1672,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
       DTS:CreationName=""
       DTS:DTSID="{AE1C543A-DBC0-43E7-A8DF-40F01B82A770}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;2"
       DTS:From="Package\Queue 2"
       DTS:LogicalAnd="True"
@@ -1698,7 +1681,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
       DTS:CreationName=""
       DTS:DTSID="{1B0BDC57-0C28-4F21-A22E-399C37FBD11D}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;3"
       DTS:From="Package\Queue 3"
       DTS:LogicalAnd="True"
@@ -1708,7 +1690,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 13]"
       DTS:CreationName=""
       DTS:DTSID="{9B1042DD-0543-4EC0-998D-999A3BA5ECC7}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;4"
       DTS:From="Package\Queue 4"
       DTS:LogicalAnd="True"
@@ -1718,7 +1699,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 14]"
       DTS:CreationName=""
       DTS:DTSID="{66281778-580B-48F7-9324-DB7CD4F96B6F}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;5"
       DTS:From="Package\Queue 5"
       DTS:LogicalAnd="True"
@@ -1728,7 +1708,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 15]"
       DTS:CreationName=""
       DTS:DTSID="{4590150E-6751-4563-9DC1-AD4DD7BF6653}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;6"
       DTS:From="Package\Queue 6"
       DTS:LogicalAnd="True"
@@ -1738,7 +1717,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 16]"
       DTS:CreationName=""
       DTS:DTSID="{406550D1-F4CD-4269-85A0-3EF406DDDF0A}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;7"
       DTS:From="Package\Queue 7"
       DTS:LogicalAnd="True"
@@ -1748,7 +1726,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 17]"
       DTS:CreationName=""
       DTS:DTSID="{ED32ECC7-5B87-4484-9DD2-BBC8DA602230}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;8"
       DTS:From="Package\Queue 8"
       DTS:LogicalAnd="True"
@@ -1758,7 +1735,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 18]"
       DTS:CreationName=""
       DTS:DTSID="{BCCA5690-6D0B-444C-AF69-DF718B651FDF}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;9"
       DTS:From="Package\Queue 9"
       DTS:LogicalAnd="True"
@@ -1768,7 +1744,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 19]"
       DTS:CreationName=""
       DTS:DTSID="{B9DD7245-F530-4D65-B014-18D9A523D299}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;10"
       DTS:From="Package\Queue 10"
       DTS:LogicalAnd="True"
@@ -1778,8 +1753,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{315B4D36-5EE7-4783-8232-3C7DD7F6198A}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 3"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
@@ -1798,7 +1771,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 21]"
       DTS:CreationName=""
       DTS:DTSID="{D76B4C71-8C55-4C89-A1F8-AF33D5EA11AF}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 11"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1808,7 +1780,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 22]"
       DTS:CreationName=""
       DTS:DTSID="{12DB5491-1717-4FE0-8918-D443F8659DF9}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 12"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1818,7 +1789,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 23]"
       DTS:CreationName=""
       DTS:DTSID="{53D41F4E-ECDF-436F-9C02-BAC405BD20B4}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 13"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1828,7 +1798,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 24]"
       DTS:CreationName=""
       DTS:DTSID="{153ABB78-1834-4408-A049-DE23D4564DB5}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 14"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1838,7 +1807,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 25]"
       DTS:CreationName=""
       DTS:DTSID="{ED3725DB-AB86-4B31-B26A-4D392463B4A8}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 15"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1848,7 +1816,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 26]"
       DTS:CreationName=""
       DTS:DTSID="{86CF054A-700B-4AEF-AC34-B8F349579EED}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 16"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1858,7 +1825,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 27]"
       DTS:CreationName=""
       DTS:DTSID="{1157AA6C-415F-437D-A564-3B6228D27130}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 17"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1868,7 +1834,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 28]"
       DTS:CreationName=""
       DTS:DTSID="{706D9D1D-D140-4B92-A428-0D95B4B1EA70}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 18"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1878,7 +1843,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 29]"
       DTS:CreationName=""
       DTS:DTSID="{1C5B4AB9-164D-44F2-9EC9-AD8AA8FF0176}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 19"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1888,8 +1852,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{9DA5B306-4F62-4EC1-9797-9AB92AC808E7}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 4"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -1898,7 +1860,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 30]"
       DTS:CreationName=""
       DTS:DTSID="{D229D2E0-8929-40EA-BBCF-8826A75850F6}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 20"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -1908,7 +1869,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 31]"
       DTS:CreationName=""
       DTS:DTSID="{BEB58025-4010-43E0-A74A-E41879C6D2DB}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;11"
       DTS:From="Package\Queue 11"
       DTS:LogicalAnd="True"
@@ -1918,7 +1878,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 32]"
       DTS:CreationName=""
       DTS:DTSID="{4E9A4CE4-48B8-4EE1-8ADF-38AD4F2AE5DD}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;12"
       DTS:From="Package\Queue 12"
       DTS:LogicalAnd="True"
@@ -1928,7 +1887,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 33]"
       DTS:CreationName=""
       DTS:DTSID="{3F0E90D7-408A-4C16-ABE1-E9F07CE91F43}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;13"
       DTS:From="Package\Queue 13"
       DTS:LogicalAnd="True"
@@ -1938,7 +1896,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 34]"
       DTS:CreationName=""
       DTS:DTSID="{1601B9AA-C437-4A09-BE69-D6B806434E64}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;14"
       DTS:From="Package\Queue 14"
       DTS:LogicalAnd="True"
@@ -1948,7 +1905,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 35]"
       DTS:CreationName=""
       DTS:DTSID="{BD881B7A-BF14-4899-98B9-1FAFAD7F5A28}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;15"
       DTS:From="Package\Queue 15"
       DTS:LogicalAnd="True"
@@ -1958,7 +1914,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 36]"
       DTS:CreationName=""
       DTS:DTSID="{D1856470-D6AC-4202-99C5-139CE9771CC4}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;16"
       DTS:From="Package\Queue 16"
       DTS:LogicalAnd="True"
@@ -1968,7 +1923,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 37]"
       DTS:CreationName=""
       DTS:DTSID="{AAA4A900-D6D8-4F8F-8F84-A4A1B94E3F76}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;17"
       DTS:From="Package\Queue 17"
       DTS:LogicalAnd="True"
@@ -1978,7 +1932,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 38]"
       DTS:CreationName=""
       DTS:DTSID="{1298F9BE-0EE1-4DCC-B450-6FE03896F4A8}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;18"
       DTS:From="Package\Queue 18"
       DTS:LogicalAnd="True"
@@ -1988,7 +1941,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 39]"
       DTS:CreationName=""
       DTS:DTSID="{1B4F7FB0-85E0-41A4-A792-5B18A1DD76C9}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;19"
       DTS:From="Package\Queue 19"
       DTS:LogicalAnd="True"
@@ -1998,7 +1950,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
       DTS:DTSID="{958A26C0-7CC2-4756-AC24-0805E4C98E7D}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 5"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2008,7 +1959,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 40]"
       DTS:CreationName=""
       DTS:DTSID="{F83A0D8B-B392-49B6-8529-0EFE656BAD2C}"
-      DTS:EvalOp="4"
       DTS:Expression="@[$Package::P_ParallelProcesses] &lt;20"
       DTS:From="Package\Queue 20"
       DTS:LogicalAnd="True"
@@ -2018,7 +1968,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
       DTS:DTSID="{16886E92-1254-44D4-8EBA-1EAB1716AB12}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 6"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2028,7 +1977,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
       DTS:DTSID="{8E02A1BB-C2EE-4AE7-BA39-D6FE72C1D962}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 7"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2038,7 +1986,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
       DTS:CreationName=""
       DTS:DTSID="{283431E2-89F2-4EF7-9748-B7B9A2BEB1F4}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 8"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2048,7 +1995,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
       DTS:CreationName=""
       DTS:DTSID="{5C5A71AE-6AEC-4B8C-85A0-05D3382C7F44}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 9"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2058,7 +2004,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
       DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
       DTS:CreationName=""
       DTS:DTSID="{7BC7506D-B505-444B-8486-338C9A3A9015}"
-      DTS:EvalOp="3"
       DTS:Expression="@[$Package::P_ParallelProcesses] &gt;= 10"
       DTS:From="Package\Queue Building"
       DTS:LogicalAnd="True"
@@ -2151,6 +2096,105 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           Id="Package\Queue 10"
           TopLeft="1819.59090909091,753.5" />
         <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 11\RunJobQueue 11"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 11"
+          TopLeft="2003.59090909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 12\RunJobQueue 12"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 12"
+          TopLeft="2187.21590909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 13\RunJobQueue 13"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 13"
+          TopLeft="2370.84090909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 14\RunJobQueue 14"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 14"
+          TopLeft="2554.46590909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 15\RunJobQueue 15"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 15"
+          TopLeft="2738.09090909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 16\RunJobQueue 16"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 16"
+          TopLeft="2920.71590909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 17\RunJobQueue 17"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 17"
+          TopLeft="3104.34090909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 18\RunJobQueue 18"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 18"
+          TopLeft="3287.96590909091,753" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 19\RunJobQueue 19"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 19"
+          TopLeft="3471.59090909091,753" />
+        <NodeLayout
           Size="155,42"
           Id="Package\Queue 2\RunJobQueue 2"
           TopLeft="5.5,5.5" />
@@ -2161,6 +2205,17 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           Size="172,145"
           Id="Package\Queue 2"
           TopLeft="349.215909090909,752.5" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Queue 20\RunJobQueue 20"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="172,102"
+          Size="172,145"
+          Id="Package\Queue 20"
+          TopLeft="3657.59090909091,754" />
         <NodeLayout
           Size="155,42"
           Id="Package\Queue 3\RunJobQueue 3"
@@ -2404,9 +2459,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-268.159090909091,25.7572425459928,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2440,9 +2493,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-208.801136363636,40.0218629432298,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2476,9 +2527,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="340.002164502165,110.533667853674,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2512,9 +2561,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="254.237283549784,102.515255758301,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2548,9 +2595,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="168.472402597402,95.6292743953294,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2584,9 +2629,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="82.7075216450212,89.6516489223578,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2620,9 +2663,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-3.05735930735977,84.4137637028015,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2656,9 +2697,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-88.3222402597407,79.7863041982106,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2692,9 +2731,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-174.087121212122,75.6684370257967,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2728,9 +2765,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-259.852002164503,71.9803780562975,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2764,9 +2799,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-345.616883116884,68.6581722319859,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2800,9 +2833,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-432.569264069264,65.1381395348837,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2836,9 +2867,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-149.443181818181,50.9780737372097,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2865,375 +2894,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="966.636363636364,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-164.170454545454,129.5"
-              Start="0,0"
-              End="-164.170454545454,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,50.6572551302576" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,50.6572551302576"
-                    Point2="0,54.6572551302576"
-                    Point3="-4,54.6572551302576" />
-                  <mssgle:LineSegment
-                    End="-160.170454545454,54.6572551302576" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-160.170454545454,54.6572551302576"
-                    Point2="-164.170454545454,54.6572551302576"
-                    Point3="-164.170454545454,58.6572551302576" />
-                  <mssgle:LineSegment
-                    End="-164.170454545454,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-90.0852272727268,59.6572551302576,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="1031.54545454545,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-45.4545454545445,129.5"
-              Start="0,0"
-              End="-45.4545454545445,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,57.7024390243902" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,57.7024390243902"
-                    Point2="0,61.7024390243902"
-                    Point3="-4,61.7024390243902" />
-                  <mssgle:LineSegment
-                    End="-41.4545454545445,61.7024390243902" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-41.4545454545445,61.7024390243902"
-                    Point2="-45.4545454545445,61.7024390243902"
-                    Point3="-45.4545454545445,65.7024390243902" />
-                  <mssgle:LineSegment
-                    End="-45.4545454545445,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-30.7272727272722,66.7024390243902,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="1096.45454545455,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="72.2613636363644,129.5"
-              Start="0,0"
-              End="72.2613636363644,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,57.7024390243902" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,57.7024390243902"
-                    Point2="0,61.7024390243902"
-                    Point3="4,61.7024390243902" />
-                  <mssgle:LineSegment
-                    End="68.2613636363644,61.7024390243902" />
-                  <mssgle:CubicBezierSegment
-                    Point1="68.2613636363644,61.7024390243902"
-                    Point2="72.2613636363644,61.7024390243902"
-                    Point3="72.2613636363644,65.7024390243902" />
-                  <mssgle:LineSegment
-                    End="72.2613636363644,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="28.1306818181822,66.7024390243902,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1161.36363636364,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="190.977272727273,129.5"
-              Start="0,0"
-              End="190.977272727273,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,50.6572551302576" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,50.6572551302576"
-                    Point2="0,54.6572551302576"
-                    Point3="4,54.6572551302576" />
-                  <mssgle:LineSegment
-                    End="186.977272727273,54.6572551302576" />
-                  <mssgle:CubicBezierSegment
-                    Point1="186.977272727273,54.6572551302576"
-                    Point2="190.977272727273,54.6572551302576"
-                    Point3="190.977272727273,58.6572551302576" />
-                  <mssgle:LineSegment
-                    End="190.977272727273,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="87.4886363636365,59.6572551302576,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="1226.27272727273,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="309.693181818183,129.5"
-              Start="0,0"
-              End="309.693181818183,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.9780737372097" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,41.9780737372097"
-                    Point2="0,45.9780737372097"
-                    Point3="4,45.9780737372097" />
-                  <mssgle:LineSegment
-                    End="305.693181818183,45.9780737372097" />
-                  <mssgle:CubicBezierSegment
-                    Point1="305.693181818183,45.9780737372097"
-                    Point2="309.693181818183,45.9780737372097"
-                    Point3="309.693181818183,49.9780737372097" />
-                  <mssgle:LineSegment
-                    End="309.693181818183,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="146.846590909091,50.9780737372097,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="1291.18181818182,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="428.409090909092,129.5"
-              Start="0,0"
-              End="428.409090909092,122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.0218629432298" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.0218629432298"
-                    Point2="0,35.0218629432298"
-                    Point3="4,35.0218629432298" />
-                  <mssgle:LineSegment
-                    End="424.409090909092,35.0218629432298" />
-                  <mssgle:CubicBezierSegment
-                    Point1="424.409090909092,35.0218629432298"
-                    Point2="428.409090909092,35.0218629432298"
-                    Point3="428.409090909092,39.0218629432298" />
-                  <mssgle:LineSegment
-                    End="428.409090909092,122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="206.204545454546,40.0218629432298,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="1356.09090909091,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="549.500000000001,130.5"
-              Start="0,0"
-              End="549.500000000001,123">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.9175301332206" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.9175301332206"
-                    Point2="0,20.9175301332206"
-                    Point3="4,20.9175301332206" />
-                  <mssgle:LineSegment
-                    End="545.500000000001,20.9175301332206" />
-                  <mssgle:CubicBezierSegment
-                    Point1="545.500000000001,20.9175301332206"
-                    Point2="549.500000000001,20.9175301332206"
-                    Point3="549.500000000001,24.9175301332206" />
-                  <mssgle:LineSegment
-                    End="549.500000000001,123" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="266.75,25.9175301332206,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <AnnotationLayout
-          Text="To extend the number of parallel process, you need to&#xA;copy the last Sequence Container a couple&#xA;of times and make sure to replace variable5&#xA;by variableX in all expressions and parameters."
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="318,88"
-          Id="26e6084f-f9c8-4e26-9e27-4a359b41d00b"
-          TopLeft="1937.59090909091,480" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 11\RunJobQueue 11"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 11"
-          TopLeft="2003.59090909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 12\RunJobQueue 12"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 12"
-          TopLeft="2187.21590909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 13\RunJobQueue 13"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 13"
-          TopLeft="2370.84090909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 14\RunJobQueue 14"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 14"
-          TopLeft="2554.46590909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 15\RunJobQueue 15"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 15"
-          TopLeft="2738.09090909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 16\RunJobQueue 16"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 16"
-          TopLeft="2920.71590909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 17\RunJobQueue 17"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 17"
-          TopLeft="3104.34090909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 18\RunJobQueue 18"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 18"
-          TopLeft="3287.96590909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 19\RunJobQueue 19"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 19"
-          TopLeft="3471.59090909091,753" />
-        <NodeLayout
-          Size="159,42"
-          Id="Package\Queue 20\RunJobQueue 20"
-          TopLeft="5.5,5.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="172,102"
-          Size="172,145"
-          Id="Package\Queue 20"
-          TopLeft="3657.59090909091,754" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 21]"
           TopLeft="1361.5,623">
@@ -3265,9 +2925,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="356.045454545455,24.4464075382803,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3301,9 +2959,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="445.569493006993,23.2414361604689,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3337,9 +2993,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="535.420454545455,22.1875,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3373,9 +3027,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="625.532954545455,21.2578768783325,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3409,9 +3061,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="715.857954545455,20.4317973756485,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3445,9 +3095,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="805.857954545455,19.6928746928747,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3481,45 +3129,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="896.503787878788,19.0280065897858,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 28]"
-          TopLeft="1383.42105263158,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="1990.54485645933,130"
-              Start="0,0"
-              End="1990.54485645933,122.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,9.42659171133481" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9.42659171133481"
-                    Point2="0,13.4265917113348"
-                    Point3="4,13.4265917113348" />
-                  <mssgle:LineSegment
-                    End="1986.54485645933,13.4265917113348" />
-                  <mssgle:CubicBezierSegment
-                    Point1="1986.54485645933,13.4265917113348"
-                    Point2="1990.54485645933,13.4265917113348"
-                    Point3="1990.54485645933,17.4265917113348" />
-                  <mssgle:LineSegment
-                    End="1990.54485645933,122.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="987.272428229665,18.4265917113348,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3553,9 +3163,41 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="1078.14545454545,17.8799600698777,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="966.636363636364,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.170454545454,129.5"
+              Start="0,0"
+              End="-164.170454545454,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.6572551302576"
+                    Point2="0,54.6572551302576"
+                    Point3="-4,54.6572551302576" />
+                  <mssgle:LineSegment
+                    End="-160.170454545454,54.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.170454545454,54.6572551302576"
+                    Point2="-164.170454545454,54.6572551302576"
+                    Point3="-164.170454545454,58.6572551302576" />
+                  <mssgle:LineSegment
+                    End="-164.170454545454,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3589,9 +3231,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="1170.29545454545,17.4761904761905,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3625,9 +3265,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-518.521645021645,65.3940465116279,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3661,9 +3299,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-604.286525974026,68.3895723491505,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3697,9 +3333,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-690.051406926407,71.697760427368,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3733,9 +3367,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-775.816287878788,75.3702579666161,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3769,9 +3401,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-861.581168831169,79.4707501720578,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3805,9 +3435,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-946.84604978355,84.0786845310597,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3841,9 +3469,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1032.61093073593,89.294468969099,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3877,9 +3503,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1118.37581168831,95.2468723936614,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3913,9 +3537,41 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1204.14069264069,102.103798982949,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1031.54545454545,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-45.4545454545445,129.5"
+              Start="0,0"
+              End="-45.4545454545445,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,69.7024390243902"
+                    Point2="0,73.7024390243902"
+                    Point3="-4,73.7024390243902" />
+                  <mssgle:LineSegment
+                    End="-41.4545454545445,73.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-41.4545454545445,73.7024390243902"
+                    Point2="-45.4545454545445,73.7024390243902"
+                    Point3="-45.4545454545445,77.7024390243902" />
+                  <mssgle:LineSegment
+                    End="-45.4545454545445,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3949,9 +3605,218 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1291.09307359307,109.197798640337,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="1096.45454545455,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.2613636363644,129.5"
+              Start="0,0"
+              End="72.2613636363644,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.7024390243902"
+                    Point2="0,61.7024390243902"
+                    Point3="4,61.7024390243902" />
+                  <mssgle:LineSegment
+                    End="68.2613636363644,61.7024390243902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.2613636363644,61.7024390243902"
+                    Point2="72.2613636363644,61.7024390243902"
+                    Point3="72.2613636363644,65.7024390243902" />
+                  <mssgle:LineSegment
+                    End="72.2613636363644,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1161.36363636364,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190.977272727273,129.5"
+              Start="0,0"
+              End="190.977272727273,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.6572551302576"
+                    Point2="0,54.6572551302576"
+                    Point3="4,54.6572551302576" />
+                  <mssgle:LineSegment
+                    End="186.977272727273,54.6572551302576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="186.977272727273,54.6572551302576"
+                    Point2="190.977272727273,54.6572551302576"
+                    Point3="190.977272727273,58.6572551302576" />
+                  <mssgle:LineSegment
+                    End="190.977272727273,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="1226.27272727273,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="309.693181818183,129.5"
+              Start="0,0"
+              End="309.693181818183,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.9780737372097"
+                    Point2="0,45.9780737372097"
+                    Point3="4,45.9780737372097" />
+                  <mssgle:LineSegment
+                    End="305.693181818183,45.9780737372097" />
+                  <mssgle:CubicBezierSegment
+                    Point1="305.693181818183,45.9780737372097"
+                    Point2="309.693181818183,45.9780737372097"
+                    Point3="309.693181818183,49.9780737372097" />
+                  <mssgle:LineSegment
+                    End="309.693181818183,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="1291.18181818182,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="428.409090909092,129.5"
+              Start="0,0"
+              End="428.409090909092,122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.0218629432298"
+                    Point2="0,35.0218629432298"
+                    Point3="4,35.0218629432298" />
+                  <mssgle:LineSegment
+                    End="424.409090909092,35.0218629432298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="424.409090909092,35.0218629432298"
+                    Point2="428.409090909092,35.0218629432298"
+                    Point3="428.409090909092,39.0218629432298" />
+                  <mssgle:LineSegment
+                    End="428.409090909092,122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="1356.09090909091,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="549.500000000001,130.5"
+              Start="0,0"
+              End="549.500000000001,123">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.9175301332206" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.9175301332206"
+                    Point2="0,20.9175301332206"
+                    Point3="4,20.9175301332206" />
+                  <mssgle:LineSegment
+                    End="545.500000000001,20.9175301332206" />
+                  <mssgle:CubicBezierSegment
+                    Point1="545.500000000001,20.9175301332206"
+                    Point2="549.500000000001,20.9175301332206"
+                    Point3="549.500000000001,24.9175301332206" />
+                  <mssgle:LineSegment
+                    End="549.500000000001,123" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="To extend the number of parallel process, you need to&#xA;copy the last Sequence Container a couple&#xA;of times and make sure to replace variable5&#xA;by variableX in all expressions and parameters."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="318,88"
+          Id="26e6084f-f9c8-4e26-9e27-4a359b41d00b"
+          TopLeft="1937.59090909091,480" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 28]"
+          TopLeft="1383.42105263158,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="1990.54485645933,130"
+              Start="0,0"
+              End="1990.54485645933,122.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.42659171133481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.42659171133481"
+                    Point2="0,13.4265917113348"
+                    Point3="4,13.4265917113348" />
+                  <mssgle:LineSegment
+                    End="1986.54485645933,13.4265917113348" />
+                  <mssgle:CubicBezierSegment
+                    Point1="1986.54485645933,13.4265917113348"
+                    Point2="1990.54485645933,13.4265917113348"
+                    Point3="1990.54485645933,17.4265917113348" />
+                  <mssgle:LineSegment
+                    End="1990.54485645933,122.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
