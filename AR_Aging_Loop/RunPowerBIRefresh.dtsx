@@ -1,0 +1,92 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/9/2020 3:03:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="METLUDUDLT23783"
+  DTS:CreatorName="HARSCO\jbernier"
+  DTS:DTSID="{0A26C6B2-FAB0-439A-AA49-5CEF7ADFF752}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.128"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="RunPowerBIRefresh"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{0C60C179-AA03-46D7-BE2D-CF458E1B5856}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1A30F566-017D-4E26-B021-D80740BBA8D1}"
+      DTS:ObjectName="P_DatasetID">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">a28b4269-a4ad-486e-bb6d-c8287465f353</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C74940F7-ED4C-45E3-9F4B-D37C4DC10553}"
+      DTS:ObjectName="P_WorkspaceID">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">b46726bb-dded-43e7-b86f-7ccb273f8245</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{28716B97-75B0-4A5C-AF05-E998EFD3B386}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;-file &quot; +  @[$Project::PBIRefresh_PowerShell_File] + &quot; -P_WorkspaceID &quot; +  @[$Package::P_WorkspaceID] + &quot; -P_DatasetID &quot; +  @[$Package::P_DatasetID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PBICommand">
+      <DTS:VariableValue
+        DTS:DataType="8">-file F:\Scripts\PowerBI\Refresh_PowerBI_Dataset.ps1 -P_WorkspaceID b46726bb-dded-43e7-b86f-7ccb273f8245 -P_DatasetID a28b4269-a4ad-486e-bb6d-c8287465f353</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\PowerShell PowerBI Refresh"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="PowerShell PowerBI Refresh"
+      DTS:DTSID="{0B6C2733-1DB7-4AE6-992F-A49A5E85A308}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PowerShell PowerBI Refresh"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">@[User::PBICommand]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="PowerShell.exe"
+          Arguments="-file F:\Scripts\PowerBI\Refresh_PowerBI_Dataset.ps1 -P_WorkspaceID b46726bb-dded-43e7-b86f-7ccb273f8245 -P_DatasetID a28b4269-a4ad-486e-bb6d-c8287465f353" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="212,42"
+          Id="Package\PowerShell PowerBI Refresh"
+          TopLeft="668,207" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
