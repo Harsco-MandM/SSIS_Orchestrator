@@ -8,15 +8,15 @@
   DTS:Description="http://microsoft-ssis.blogspot.com/"
   DTS:DTSID="{05B30AA5-C503-4D78-B692-F14AB0CDC199}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.128"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
   DTS:LocaleID="1043"
   DTS:MaxConcurrentExecutables="20"
   DTS:ObjectName="_RunExecutionPlan"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="150"
+  DTS:VersionBuild="153"
   DTS:VersionComments="example package"
-  DTS:VersionGUID="{143B53D0-4C0A-4691-B1E0-7E9CECF62C3C}">
+  DTS:VersionGUID="{ABE71032-A84F-4C7B-AD95-F6AB79876349}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -382,7 +382,7 @@ MasterPackageExecID = 0</DTS:VariableValue>
       DTS:CreationName=""
       DTS:DTSID="{559C9A19-F5D7-4280-9AAD-E583B533A2CF}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;&#xA;DECLARE @FailureCount int = 0&#xA;DECLARE @IncompleteCount int = 0&#xA;DECLARE @Status varchar(20)&#xA;DECLARE @StatusDescription varchar(100)&#xA;&#xA;SET @FailureCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;SET @IncompleteCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;&#xA;IF @FailureCount != 0&#xA;  BEGIN&#xA;&#x9;SET @Status = 'Failed'&#xA;&#x9;SET @StatusDescription = 'At least one task has failed'&#xA;  END&#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 &#xA;  BEGIN&#xA;&#x9;SET @Status = 'Aborted'&#xA;&#x9;SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'&#xA;  END&#xA;ELSE&#xA;&#xA;  &#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount = 0 &#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status ='Completed',&#xA;&#x9;&#x9;&#x9;StatusDescription = 'Completed',&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;ELSE&#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription,&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription&#xA;&#x9;&#x9;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;  &#xA;&quot;"
+      DTS:Expression="&quot;&#xA;DECLARE @FailureCount int = 0&#xA;DECLARE @IncompleteCount int = 0&#xA;DECLARE @Status varchar(20)&#xA;DECLARE @StatusDescription varchar(100)&#xA;&#xA;SET @FailureCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;SET @IncompleteCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;&#xA;IF @FailureCount != 0&#xA;  BEGIN&#xA;&#x9;SET @Status = 'Failed'&#xA;&#x9;SET @StatusDescription = 'At least one task has failed'&#xA;  END&#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 &#xA;  BEGIN&#xA;&#x9;SET @Status = 'Aborted'&#xA;&#x9;SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'&#xA;  END&#xA;ELSE&#xA;&#xA;  &#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount = 0 &#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status ='Completed',&#xA;&#x9;&#x9;&#x9;StatusDescription = 'Completed',&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;ELSE&#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription,&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription&#xA;&#x9;&#x9;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;&#x9;&#x9;Exec Orchestrator.SendFailureEmail '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;  &#xA;&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQLMoveToJobHistory">
@@ -439,6 +439,8 @@ ELSE
 		SET Status =@Status,
 			StatusDescription = @StatusDescription
 		WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'StagingJDE'
+
+		Exec Orchestrator.SendFailureEmail 'StagingJDE'
   END
   
 </DTS:VariableValue>
@@ -523,7 +525,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 1"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="8">
+          DTS:ThreadHint="7">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -572,7 +574,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 10"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="8">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -621,7 +623,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 11"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="14">
+          DTS:ThreadHint="15">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -670,7 +672,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 12"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="11">
+          DTS:ThreadHint="17">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -719,7 +721,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 13"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="12">
+          DTS:ThreadHint="18">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -768,7 +770,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 14"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="18">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -817,7 +819,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 15"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="16">
+          DTS:ThreadHint="12">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -866,7 +868,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 16"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="15">
+          DTS:ThreadHint="13">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -915,7 +917,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 17"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="17">
+          DTS:ThreadHint="19">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -964,7 +966,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 18"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="13">
+          DTS:ThreadHint="16">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1013,7 +1015,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 19"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="19">
+          DTS:ThreadHint="14">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1062,7 +1064,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 2"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1111,7 +1113,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 20"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="10">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1160,7 +1162,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 3"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="9">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1258,7 +1260,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 5"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1307,7 +1309,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 6"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1356,7 +1358,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 7"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="9">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1405,7 +1407,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 8"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="10">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1454,7 +1456,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 9"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="11">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1525,7 +1527,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="1033"
           DTS:ObjectName="SQL - Fill Queue"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1542,7 +1544,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="SQL - Incremental Check"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1572,7 +1574,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="SQL - ReSubmit Queue"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2069,8 +2071,8 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="262,125"
-          Size="262,168"
+          PanelSize="262,102"
+          Size="262,145"
           Id="Package\End of Queues"
           TopLeft="931.5,1016" />
         <NodeLayout
@@ -3133,6 +3135,40 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 28]"
+          TopLeft="1383.42105263158,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="1990.54485645933,130"
+              Start="0,0"
+              End="1990.54485645933,122.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.42659171133481" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.42659171133481"
+                    Point2="0,13.4265917113348"
+                    Point3="4,13.4265917113348" />
+                  <mssgle:LineSegment
+                    End="1986.54485645933,13.4265917113348" />
+                  <mssgle:CubicBezierSegment
+                    Point1="1986.54485645933,13.4265917113348"
+                    Point2="1990.54485645933,13.4265917113348"
+                    Point3="1990.54485645933,17.4265917113348" />
+                  <mssgle:LineSegment
+                    End="1990.54485645933,122.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 29]"
           TopLeft="1385.3,623">
           <EdgeLayout.Curve>
@@ -3785,40 +3821,6 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           Size="318,88"
           Id="26e6084f-f9c8-4e26-9e27-4a359b41d00b"
           TopLeft="1937.59090909091,480" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 28]"
-          TopLeft="1383.42105263158,623">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="1990.54485645933,130"
-              Start="0,0"
-              End="1990.54485645933,122.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,9.42659171133481" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9.42659171133481"
-                    Point2="0,13.4265917113348"
-                    Point3="4,13.4265917113348" />
-                  <mssgle:LineSegment
-                    End="1986.54485645933,13.4265917113348" />
-                  <mssgle:CubicBezierSegment
-                    Point1="1986.54485645933,13.4265917113348"
-                    Point2="1990.54485645933,13.4265917113348"
-                    Point3="1990.54485645933,17.4265917113348" />
-                  <mssgle:LineSegment
-                    End="1990.54485645933,122.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
