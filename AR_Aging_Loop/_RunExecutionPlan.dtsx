@@ -14,9 +14,9 @@
   DTS:ObjectName="_RunExecutionPlan"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="153"
+  DTS:VersionBuild="160"
   DTS:VersionComments="example package"
-  DTS:VersionGUID="{ABE71032-A84F-4C7B-AD95-F6AB79876349}">
+  DTS:VersionGUID="{86EB6A33-D2B2-45DF-877A-7A4E05120608}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -382,7 +382,7 @@ MasterPackageExecID = 0</DTS:VariableValue>
       DTS:CreationName=""
       DTS:DTSID="{559C9A19-F5D7-4280-9AAD-E583B533A2CF}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;&#xA;DECLARE @FailureCount int = 0&#xA;DECLARE @IncompleteCount int = 0&#xA;DECLARE @Status varchar(20)&#xA;DECLARE @StatusDescription varchar(100)&#xA;&#xA;SET @FailureCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;SET @IncompleteCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;&#xA;IF @FailureCount != 0&#xA;  BEGIN&#xA;&#x9;SET @Status = 'Failed'&#xA;&#x9;SET @StatusDescription = 'At least one task has failed'&#xA;  END&#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 &#xA;  BEGIN&#xA;&#x9;SET @Status = 'Aborted'&#xA;&#x9;SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'&#xA;  END&#xA;ELSE&#xA;&#xA;  &#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount = 0 &#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status ='Completed',&#xA;&#x9;&#x9;&#x9;StatusDescription = 'Completed',&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;ELSE&#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription,&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription&#xA;&#x9;&#x9;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;&#x9;&#x9;Exec Orchestrator.SendFailureEmail '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;  &#xA;&quot;"
+      DTS:Expression="&quot;&#xA;DECLARE @FailureCount int = 0&#xA;DECLARE @IncompleteCount int = 0&#xA;DECLARE @Status varchar(20)&#xA;DECLARE @StatusDescription varchar(100)&#xA;&#xA;SET @FailureCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status = 'Failed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;SET @IncompleteCount = &#x9;(SELECT count(*) FROM Orchestrator.CurrentRunsDetails WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;')&#xA;&#xA;IF @FailureCount != 0&#xA;  BEGIN&#xA;&#x9;SET @Status = 'Failed'&#xA;&#x9;SET @StatusDescription = 'At least one task has failed'&#xA;  END&#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount &lt;&gt; 0 &#xA;  BEGIN&#xA;&#x9;SET @Status = 'Aborted'&#xA;&#x9;SET @StatusDescription = 'At least one other task has failed - aborting the execution plan'&#xA;  END&#xA;ELSE&#xA;&#xA;  &#xA;  &#xA;IF @FailureCount = 0 AND @IncompleteCount = 0 &#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status ='Completed',&#xA;&#x9;&#x9;&#x9;StatusDescription = 'Completed',&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistory SELECT * FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRuns WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;INSERT INTO Orchestrator.RunHistoryDetails SELECT * FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;DELETE FROM Orchestrator.CurrentRunsDetails WHERE  ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;ELSE&#xA;  BEGIN&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRuns&#xA;&#x9;&#x9;SET Status =@Status,&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription,&#xA;&#x9;&#x9;&#x9;EndTime = GETUTCDATE(),&#xA;&#x9;&#x9;&#x9;Duration = Duration + DATEDIFF(SECOND, StartTime, GETUTCDATE())&#xA;&#x9;&#x9;WHERE ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;UPDATE Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;--SET Status =@Status,&#xA;&#x9;&#x9;SET Status ='Aborted',&#xA;&#x9;&#x9;&#x9;StatusDescription = @StatusDescription&#xA;&#x9;&#x9;WHERE Status not in ('Completed','Failed') and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;&#x9;&#x9;Exec Orchestrator.SendFailureEmail '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;  END&#xA;  &#xA;&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQLMoveToJobHistory">
@@ -436,7 +436,8 @@ ELSE
 		WHERE ExecutionPlanName = 'StagingJDE'
 		
 		UPDATE Orchestrator.CurrentRunsDetails
-		SET Status =@Status,
+		--SET Status =@Status,
+		SET Status ='Aborted',
 			StatusDescription = @StatusDescription
 		WHERE Status not in ('Completed','Failed') and ExecutionPlanName = 'StagingJDE'
 
@@ -449,7 +450,7 @@ ELSE
       DTS:CreationName=""
       DTS:DTSID="{0E585066-FA33-430C-9CC1-DD496378FADC}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;&#xA;UPDATE Orchestrator.CurrentRuns&#xA;SET Status ='Running',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot;,&#xA;&#x9;&#x9;StartTime = GETUTCDATE(),&#xA;&#x9;&#x9;EndTime = NULL,&#xA;&#x9;&#x9;RunCount = RunCount + 1&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Queued',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot; ,&#xA;&#x9;StartTime = NULL,&#xA;&#x9;EndTime = NULL&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;&#xA;&quot;"
+      DTS:Expression="&quot;&#xA;UPDATE Orchestrator.CurrentRuns&#xA;SET Status ='Running',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot;,&#xA;&#x9;&#x9;StartTime = GETUTCDATE(),&#xA;&#x9;&#x9;EndTime = NULL,&#xA;&#x9;&#x9;RunCount = RunCount + 1&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;'&#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Queued',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = &quot; + (DT_STR,10,1252)@[System::ServerExecutionID] + &quot; ,&#xA;&#x9;StartTime = NULL,&#xA;&#x9;EndTime = NULL&#xA;WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;' &#xA;&#xA;/* Re-Submitting TRUNCATE statement and for JDE extract for all Libraries */&#xA;&#xA;UPDATE Orchestrator.CurrentRunsDetails&#xA;SET Status ='Queued',&#xA;        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',&#xA;        MasterPackageExecID = 0 ,&#xA;&#x9;StartTime = NULL,&#xA;&#x9;EndTime = NULL&#xA;WHERE ExecutionPlanName + TaskName in ( &#xA;&#x9;&#x9;Select ExecutionPlanName +'TRUNCATE TABLE ' + TargetTable&#xA;&#x9;&#x9;from Orchestrator.ExecutionPlanDetails&#xA;&#x9;&#x9;where ExecutionPlanName + TaskName in (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;select ExecutionPlanName + TaskName&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;' and&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Status != 'Completed' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;)&#xA;&#x9;&#x9;UNION&#xA;&#x9;&#x9;select distinct ExecutionPlanName + TaskName&#xA;&#x9;&#x9;from Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;where ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;' and&#xA;&#x9;&#x9;Status != 'Completed' and&#xA;&#x9;&#x9;Parameter like 'P_DTA_LIB%'&#xA;&#x9;&#x9;)&#xA;&#xA;/* FOR JDE, updating the incremental tracking to restart the full load on other completed libs of the failed task */&#xA;&#xA;UPDATE [SSISDB].[Orchestrator].[IncrementalTracking]&#xA;SET LastRunTMST = CAST('1/1/1900' AS DATETIME), &#xA;&#x9;LastRunDT   = CAST('1/1/1900' AS DATE)&#xA;WHERE ExecutionPlanName + TaskName  IN (&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;select distinct ExecutionPlanName + TaskName &#xA;&#x9;&#x9;&#x9;from Orchestrator.CurrentRunsDetails&#xA;&#x9;&#x9;&#x9;where ExecutionPlanName = '&quot; + @[$Package::P_ExecutionPlanName]  + &quot;' and&#xA;&#x9;&#x9;&#x9;Status != 'Completed' and&#xA;&#x9;&#x9;&#x9;Parameter like 'P_DTA_LIB%'&#xA;)&#xA;&#xA;&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQLReSubmitQueue">
@@ -470,8 +471,46 @@ SET Status ='Queued',
         MasterPackageExecID = 0 ,
 	StartTime = NULL,
 	EndTime = NULL
-WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
+WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE' 
 
+/* Re-Submitting TRUNCATE statement and for JDE extract for all Libraries */
+
+UPDATE Orchestrator.CurrentRunsDetails
+SET Status ='Queued',
+        StatusDescription = 'Previous execution failure detected - re-submitting failed/skipped tasks',
+        MasterPackageExecID = 0 ,
+	StartTime = NULL,
+	EndTime = NULL
+WHERE ExecutionPlanName + TaskName in ( 
+		Select ExecutionPlanName +'TRUNCATE TABLE ' + TargetTable
+		from Orchestrator.ExecutionPlanDetails
+		where ExecutionPlanName + TaskName in (
+					select ExecutionPlanName + TaskName
+					from Orchestrator.CurrentRunsDetails
+					where ExecutionPlanName = 'StagingJDE' and
+					Status != 'Completed' 
+					)
+		UNION
+		select distinct ExecutionPlanName + TaskName
+		from Orchestrator.CurrentRunsDetails
+		where ExecutionPlanName = 'StagingJDE' and
+		Status != 'Completed' and
+		Parameter like 'P_DTA_LIB%'
+		)
+
+/* FOR JDE, updating the incremental tracking to restart the full load on other completed libs of the failed task */
+
+UPDATE [SSISDB].[Orchestrator].[IncrementalTracking]
+SET LastRunTMST = CAST('1/1/1900' AS DATETIME), 
+	LastRunDT   = CAST('1/1/1900' AS DATE)
+WHERE ExecutionPlanName + TaskName  IN (
+		
+			select distinct ExecutionPlanName + TaskName 
+			from Orchestrator.CurrentRunsDetails
+			where ExecutionPlanName = 'StagingJDE' and
+			Status != 'Completed' and
+			Parameter like 'P_DTA_LIB%'
+)
 
 </DTS:VariableValue>
     </DTS:Variable>
@@ -525,7 +564,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 1"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -574,7 +613,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 10"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="8">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -623,7 +662,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 11"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="15">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -672,7 +711,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 12"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="17">
+          DTS:ThreadHint="18">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -721,7 +760,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 13"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="18">
+          DTS:ThreadHint="16">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -770,7 +809,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 14"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="13">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -819,7 +858,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 15"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="12">
+          DTS:ThreadHint="17">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -868,7 +907,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 16"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="13">
+          DTS:ThreadHint="14">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -966,7 +1005,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 18"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="16">
+          DTS:ThreadHint="12">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1015,7 +1054,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 19"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="14">
+          DTS:ThreadHint="11">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1064,7 +1103,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 2"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="7">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1113,7 +1152,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 20"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="15">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1211,7 +1250,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 4"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="8">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1260,7 +1299,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 5"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="9">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1309,7 +1348,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 6"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1358,7 +1397,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 7"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="9">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1407,7 +1446,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 8"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="10">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1456,7 +1495,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           DTS:LocaleID="-1"
           DTS:ObjectName="RunJobQueue 9"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; Â© 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="11">
+          DTS:ThreadHint="10">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2298,7 +2337,7 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         <NodeLayout
           Size="281,42"
           Id="Package\Queue Building\SQL - Check for incomplete Execution Plan"
-          TopLeft="205.5,44" />
+          TopLeft="204.5,42" />
         <NodeLayout
           Size="157,42"
           Id="Package\Queue Building\SQL - Fill Queue"
@@ -2306,97 +2345,97 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         <NodeLayout
           Size="198,42"
           Id="Package\Queue Building\SQL - Incremental Check"
-          TopLeft="376,172" />
+          TopLeft="377,171" />
         <NodeLayout
           Size="165,42"
           Id="Package\Queue Building\SQL - ReSubmit Queue"
           TopLeft="167.5,167" />
         <EdgeLayout
           Id="Package\Queue Building.PrecedenceConstraints[Constraint]"
-          TopLeft="300.5,86">
+          TopLeft="299.5,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-50.5,81"
+              EndConnector="-49.5,83"
               Start="0,0"
-              End="-50.5,73.5">
+              End="-49.5,75.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.6751592356688" />
+                    End="0,29.4819532908705" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.6751592356688"
-                    Point2="0,32.6751592356688"
-                    Point3="-4,32.6751592356688" />
+                    Point1="0,29.4819532908705"
+                    Point2="0,33.4819532908705"
+                    Point3="-4,33.4819532908705" />
                   <mssgle:LineSegment
-                    End="-46.5,32.6751592356688" />
+                    End="-45.5,33.4819532908705" />
                   <mssgle:CubicBezierSegment
-                    Point1="-46.5,32.6751592356688"
-                    Point2="-50.5,32.6751592356688"
-                    Point3="-50.5,36.6751592356688" />
+                    Point1="-45.5,33.4819532908705"
+                    Point2="-49.5,33.4819532908705"
+                    Point3="-49.5,37.4819532908705" />
                   <mssgle:LineSegment
-                    End="-50.5,73.5" />
+                    End="-49.5,75.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-33.25,37.6751592356688,16,16"
+              BoundingBox="-32.75,38.4819532908705,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Queue Building.PrecedenceConstraints[Constraint 1]"
-          TopLeft="391.5,86">
+          TopLeft="390.5,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="83.5,86"
+              EndConnector="85.5,87"
               Start="0,0"
-              End="83.5,78.5">
+              End="85.5,79.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.692144373673" />
+                    End="0,31.0955414012739" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.692144373673"
-                    Point2="0,34.692144373673"
-                    Point3="4,34.692144373673" />
+                    Point1="0,31.0955414012739"
+                    Point2="0,35.0955414012739"
+                    Point3="4,35.0955414012739" />
                   <mssgle:LineSegment
-                    End="79.5,34.692144373673" />
+                    End="81.5,35.0955414012739" />
                   <mssgle:CubicBezierSegment
-                    Point1="79.5,34.692144373673"
-                    Point2="83.5,34.692144373673"
-                    Point3="83.5,38.692144373673" />
+                    Point1="81.5,35.0955414012739"
+                    Point2="85.5,35.0955414012739"
+                    Point3="85.5,39.0955414012739" />
                   <mssgle:LineSegment
-                    End="83.5,78.5" />
+                    End="85.5,79.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="33.75,39.692144373673,16,16"
+              BoundingBox="34.75,40.0955414012739,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Queue Building.PrecedenceConstraints[Constraint 2]"
-          TopLeft="474,214">
+          TopLeft="474.5,213">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,49.5"
+              EndConnector="0,50.5"
               Start="0,0"
-              End="0,42">
+              End="0,43">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42" />
+                    End="0,43" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2422,8 +2461,8 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="722,352"
-          Size="722,395"
+          PanelSize="722,361"
+          Size="722,404"
           Id="Package\Queue Building"
           TopLeft="703,228" />
         <NodeLayout
@@ -2432,30 +2471,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
           TopLeft="932,115.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="771.909090909091,623">
+          TopLeft="741,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-520.318181818182,129.5"
+              EndConnector="-489.409090909091,120.5"
               Start="0,0"
-              End="-520.318181818182,122">
+              End="-489.409090909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.7572425459928" />
+                    End="0,7.47619047619048" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16.7572425459928"
-                    Point2="0,20.7572425459928"
-                    Point3="-4,20.7572425459928" />
+                    Point1="0,7.47619047619048"
+                    Point2="0,11.4761904761905"
+                    Point3="-4,11.4761904761905" />
                   <mssgle:LineSegment
-                    End="-516.318181818182,20.7572425459928" />
+                    End="-485.409090909091,11.4761904761905" />
                   <mssgle:CubicBezierSegment
-                    Point1="-516.318181818182,20.7572425459928"
-                    Point2="-520.318181818182,20.7572425459928"
-                    Point3="-520.318181818182,24.7572425459928" />
+                    Point1="-485.409090909091,11.4761904761905"
+                    Point2="-489.409090909091,11.4761904761905"
+                    Point3="-489.409090909091,15.4761904761905" />
                   <mssgle:LineSegment
-                    End="-520.318181818182,122" />
+                    End="-489.409090909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2466,30 +2505,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="836.818181818182,623">
+          TopLeft="775,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-401.602272727273,129.5"
+              EndConnector="-339.784090909091,120.5"
               Start="0,0"
-              End="-401.602272727273,122">
+              End="-339.784090909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.0218629432298" />
+                    End="0,16.0369515011547" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.0218629432298"
-                    Point2="0,35.0218629432298"
-                    Point3="-4,35.0218629432298" />
+                    Point1="0,16.0369515011547"
+                    Point2="0,20.0369515011547"
+                    Point3="-4,20.0369515011547" />
                   <mssgle:LineSegment
-                    End="-397.602272727273,35.0218629432298" />
+                    End="-335.784090909091,20.0369515011547" />
                   <mssgle:CubicBezierSegment
-                    Point1="-397.602272727273,35.0218629432298"
-                    Point2="-401.602272727273,35.0218629432298"
-                    Point3="-401.602272727273,39.0218629432298" />
+                    Point1="-335.784090909091,20.0369515011547"
+                    Point2="-339.784090909091,20.0369515011547"
+                    Point3="-339.784090909091,24.0369515011547" />
                   <mssgle:LineSegment
-                    End="-401.602272727273,122" />
+                    End="-339.784090909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2840,30 +2879,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="901.727272727273,623">
+          TopLeft="809,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-282.886363636363,129.5"
+              EndConnector="-190.15909090909,120.5"
               Start="0,0"
-              End="-282.886363636363,122">
+              End="-190.15909090909,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.9780737372097" />
+                    End="0,23.3511777301927" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,41.9780737372097"
-                    Point2="0,45.9780737372097"
-                    Point3="-4,45.9780737372097" />
+                    Point1="0,23.3511777301927"
+                    Point2="0,27.3511777301927"
+                    Point3="-4,27.3511777301927" />
                   <mssgle:LineSegment
-                    End="-278.886363636363,45.9780737372097" />
+                    End="-186.15909090909,27.3511777301927" />
                   <mssgle:CubicBezierSegment
-                    Point1="-278.886363636363,45.9780737372097"
-                    Point2="-282.886363636363,45.9780737372097"
-                    Point3="-282.886363636363,49.9780737372097" />
+                    Point1="-186.15909090909,27.3511777301927"
+                    Point2="-190.15909090909,27.3511777301927"
+                    Point3="-190.15909090909,31.3511777301927" />
                   <mssgle:LineSegment
-                    End="-282.886363636363,122" />
+                    End="-190.15909090909,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2898,30 +2937,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 21]"
-          TopLeft="1361.5,623">
+          TopLeft="1081,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="728.090909090909,130"
+              EndConnector="1008.59090909091,121"
               Start="0,0"
-              End="728.090909090909,122.5">
+              End="1008.59090909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.4464075382803" />
+                    End="0,55.0411347517731" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.4464075382803"
-                    Point2="0,19.4464075382803"
-                    Point3="4,19.4464075382803" />
+                    Point1="0,55.0411347517731"
+                    Point2="0,59.0411347517731"
+                    Point3="4,59.0411347517731" />
                   <mssgle:LineSegment
-                    End="724.090909090909,19.4464075382803" />
+                    End="1004.59090909091,59.0411347517731" />
                   <mssgle:CubicBezierSegment
-                    Point1="724.090909090909,19.4464075382803"
-                    Point2="728.090909090909,19.4464075382803"
-                    Point3="728.090909090909,23.4464075382803" />
+                    Point1="1004.59090909091,59.0411347517731"
+                    Point2="1008.59090909091,59.0411347517731"
+                    Point3="1008.59090909091,63.0411347517731" />
                   <mssgle:LineSegment
-                    End="728.090909090909,122.5" />
+                    End="1008.59090909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2932,30 +2971,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 22]"
-          TopLeft="1366.07692307692,623">
+          TopLeft="1115,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="907.138986013986,130"
+              EndConnector="1158.21590909091,121"
               Start="0,0"
-              End="907.138986013986,122.5">
+              End="1158.21590909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.2414361604689" />
+                    End="0,51.9016393442623" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,14.2414361604689"
-                    Point2="0,18.2414361604689"
-                    Point3="4,18.2414361604689" />
+                    Point1="0,51.9016393442623"
+                    Point2="0,55.9016393442623"
+                    Point3="4,55.9016393442623" />
                   <mssgle:LineSegment
-                    End="903.138986013986,18.2414361604689" />
+                    End="1154.21590909091,55.9016393442623" />
                   <mssgle:CubicBezierSegment
-                    Point1="903.138986013986,18.2414361604689"
-                    Point2="907.138986013986,18.2414361604689"
-                    Point3="907.138986013986,22.2414361604689" />
+                    Point1="1154.21590909091,55.9016393442623"
+                    Point2="1158.21590909091,55.9016393442623"
+                    Point3="1158.21590909091,59.9016393442623" />
                   <mssgle:LineSegment
-                    End="907.138986013986,122.5" />
+                    End="1158.21590909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2966,30 +3005,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 23]"
-          TopLeft="1370,623">
+          TopLeft="1149,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1086.84090909091,130"
+              EndConnector="1307.84090909091,121"
               Start="0,0"
-              End="1086.84090909091,122.5">
+              End="1307.84090909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.1875" />
+                    End="0,48.4270015698587" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.1875"
-                    Point2="0,17.1875"
-                    Point3="4,17.1875" />
+                    Point1="0,48.4270015698587"
+                    Point2="0,52.4270015698587"
+                    Point3="4,52.4270015698587" />
                   <mssgle:LineSegment
-                    End="1082.84090909091,17.1875" />
+                    End="1303.84090909091,52.4270015698587" />
                   <mssgle:CubicBezierSegment
-                    Point1="1082.84090909091,17.1875"
-                    Point2="1086.84090909091,17.1875"
-                    Point3="1086.84090909091,21.1875" />
+                    Point1="1303.84090909091,52.4270015698587"
+                    Point2="1307.84090909091,52.4270015698587"
+                    Point3="1307.84090909091,56.4270015698587" />
                   <mssgle:LineSegment
-                    End="1086.84090909091,122.5" />
+                    End="1307.84090909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3000,30 +3039,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 24]"
-          TopLeft="1373.4,623">
+          TopLeft="1183,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1267.06590909091,130"
+              EndConnector="1457.46590909091,121"
               Start="0,0"
-              End="1267.06590909091,122.5">
+              End="1457.46590909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,12.2578768783325" />
+                    End="0,44.5605306799337" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,12.2578768783325"
-                    Point2="0,16.2578768783325"
-                    Point3="4,16.2578768783325" />
+                    Point1="0,44.5605306799337"
+                    Point2="0,48.5605306799337"
+                    Point3="4,48.5605306799337" />
                   <mssgle:LineSegment
-                    End="1263.06590909091,16.2578768783325" />
+                    End="1453.46590909091,48.5605306799337" />
                   <mssgle:CubicBezierSegment
-                    Point1="1263.06590909091,16.2578768783325"
-                    Point2="1267.06590909091,16.2578768783325"
-                    Point3="1267.06590909091,20.2578768783325" />
+                    Point1="1453.46590909091,48.5605306799337"
+                    Point2="1457.46590909091,48.5605306799337"
+                    Point3="1457.46590909091,52.5605306799337" />
                   <mssgle:LineSegment
-                    End="1267.06590909091,122.5" />
+                    End="1457.46590909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3034,30 +3073,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 25]"
-          TopLeft="1376.375,623">
+          TopLeft="1217,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1447.71590909091,130"
+              EndConnector="1607.09090909091,121"
               Start="0,0"
-              End="1447.71590909091,122.5">
+              End="1607.09090909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.4317973756485" />
+                    End="0,40.2319859402461" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.4317973756485"
-                    Point2="0,15.4317973756485"
-                    Point3="4,15.4317973756485" />
+                    Point1="0,40.2319859402461"
+                    Point2="0,44.2319859402461"
+                    Point3="4,44.2319859402461" />
                   <mssgle:LineSegment
-                    End="1443.71590909091,15.4317973756485" />
+                    End="1603.09090909091,44.2319859402461" />
                   <mssgle:CubicBezierSegment
-                    Point1="1443.71590909091,15.4317973756485"
-                    Point2="1447.71590909091,15.4317973756485"
-                    Point3="1447.71590909091,19.4317973756485" />
+                    Point1="1603.09090909091,44.2319859402461"
+                    Point2="1607.09090909091,44.2319859402461"
+                    Point3="1607.09090909091,48.2319859402461" />
                   <mssgle:LineSegment
-                    End="1447.71590909091,122.5" />
+                    End="1607.09090909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3068,30 +3107,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 26]"
-          TopLeft="1379,623">
+          TopLeft="1251,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1627.71590909091,130"
+              EndConnector="1755.71590909091,121"
               Start="0,0"
-              End="1627.71590909091,122.5">
+              End="1755.71590909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.6928746928747" />
+                    End="0,35.3532710280374" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.6928746928747"
-                    Point2="0,14.6928746928747"
-                    Point3="4,14.6928746928747" />
+                    Point1="0,35.3532710280374"
+                    Point2="0,39.3532710280374"
+                    Point3="4,39.3532710280374" />
                   <mssgle:LineSegment
-                    End="1623.71590909091,14.6928746928747" />
+                    End="1751.71590909091,39.3532710280374" />
                   <mssgle:CubicBezierSegment
-                    Point1="1623.71590909091,14.6928746928747"
-                    Point2="1627.71590909091,14.6928746928747"
-                    Point3="1627.71590909091,18.6928746928747" />
+                    Point1="1751.71590909091,39.3532710280374"
+                    Point2="1755.71590909091,39.3532710280374"
+                    Point3="1755.71590909091,43.3532710280374" />
                   <mssgle:LineSegment
-                    End="1627.71590909091,122.5" />
+                    End="1755.71590909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3102,30 +3141,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 27]"
-          TopLeft="1381.33333333333,623">
+          TopLeft="1285,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1809.00757575758,130"
+              EndConnector="1905.34090909091,121"
               Start="0,0"
-              End="1809.00757575758,122.5">
+              End="1905.34090909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.0280065897858" />
+                    End="0,29.812375249501" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.0280065897858"
-                    Point2="0,14.0280065897858"
-                    Point3="4,14.0280065897858" />
+                    Point1="0,29.812375249501"
+                    Point2="0,33.812375249501"
+                    Point3="4,33.812375249501" />
                   <mssgle:LineSegment
-                    End="1805.00757575758,14.0280065897858" />
+                    End="1901.34090909091,33.812375249501" />
                   <mssgle:CubicBezierSegment
-                    Point1="1805.00757575758,14.0280065897858"
-                    Point2="1809.00757575758,14.0280065897858"
-                    Point3="1809.00757575758,18.0280065897858" />
+                    Point1="1901.34090909091,33.812375249501"
+                    Point2="1905.34090909091,33.812375249501"
+                    Point3="1905.34090909091,37.812375249501" />
                   <mssgle:LineSegment
-                    End="1809.00757575758,122.5" />
+                    End="1905.34090909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3136,30 +3175,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 28]"
-          TopLeft="1383.42105263158,623">
+          TopLeft="1319,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="1990.54485645933,130"
+              EndConnector="2054.96590909091,121"
               Start="0,0"
-              End="1990.54485645933,122.5">
+              End="2054.96590909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9.42659171133481" />
+                    End="0,23.4646680942184" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,9.42659171133481"
-                    Point2="0,13.4265917113348"
-                    Point3="4,13.4265917113348" />
+                    Point1="0,23.4646680942184"
+                    Point2="0,27.4646680942184"
+                    Point3="4,27.4646680942184" />
                   <mssgle:LineSegment
-                    End="1986.54485645933,13.4265917113348" />
+                    End="2050.96590909091,27.4646680942184" />
                   <mssgle:CubicBezierSegment
-                    Point1="1986.54485645933,13.4265917113348"
-                    Point2="1990.54485645933,13.4265917113348"
-                    Point3="1990.54485645933,17.4265917113348" />
+                    Point1="2050.96590909091,27.4646680942184"
+                    Point2="2054.96590909091,27.4646680942184"
+                    Point3="2054.96590909091,31.4646680942184" />
                   <mssgle:LineSegment
-                    End="1990.54485645933,122.5" />
+                    End="2054.96590909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3170,30 +3209,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 29]"
-          TopLeft="1385.3,623">
+          TopLeft="1353,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="2172.29090909091,130"
+              EndConnector="2204.59090909091,121"
               Start="0,0"
-              End="2172.29090909091,122.5">
+              End="2204.59090909091,113.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.87996006987773" />
+                    End="0,16.1200923787529" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.87996006987773"
-                    Point2="0,12.8799600698777"
-                    Point3="4,12.8799600698777" />
+                    Point1="0,16.1200923787529"
+                    Point2="0,20.1200923787529"
+                    Point3="4,20.1200923787529" />
                   <mssgle:LineSegment
-                    End="2168.29090909091,12.8799600698777" />
+                    End="2200.59090909091,20.1200923787529" />
                   <mssgle:CubicBezierSegment
-                    Point1="2168.29090909091,12.8799600698777"
-                    Point2="2172.29090909091,12.8799600698777"
-                    Point3="2172.29090909091,16.8799600698777" />
+                    Point1="2200.59090909091,20.1200923787529"
+                    Point2="2204.59090909091,20.1200923787529"
+                    Point3="2204.59090909091,24.1200923787529" />
                   <mssgle:LineSegment
-                    End="2172.29090909091,122.5" />
+                    End="2204.59090909091,113.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3204,30 +3243,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="966.636363636364,623">
+          TopLeft="843,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-164.170454545454,129.5"
+              EndConnector="-40.53409090909,120.5"
               Start="0,0"
-              End="-164.170454545454,122">
+              End="-40.53409090909,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.6572551302576" />
+                    End="0,29.6726546906188" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,50.6572551302576"
-                    Point2="0,54.6572551302576"
-                    Point3="-4,54.6572551302576" />
+                    Point1="0,29.6726546906188"
+                    Point2="0,33.6726546906188"
+                    Point3="-4,33.6726546906188" />
                   <mssgle:LineSegment
-                    End="-160.170454545454,54.6572551302576" />
+                    End="-36.53409090909,33.6726546906188" />
                   <mssgle:CubicBezierSegment
-                    Point1="-160.170454545454,54.6572551302576"
-                    Point2="-164.170454545454,54.6572551302576"
-                    Point3="-164.170454545454,58.6572551302576" />
+                    Point1="-36.53409090909,33.6726546906188"
+                    Point2="-40.53409090909,33.6726546906188"
+                    Point3="-40.53409090909,37.6726546906188" />
                   <mssgle:LineSegment
-                    End="-164.170454545454,122" />
+                    End="-40.53409090909,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3238,30 +3277,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 30]"
-          TopLeft="1387,623">
+          TopLeft="1387,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="2356.59090909091,131"
+              EndConnector="2356.59090909091,122"
               Start="0,0"
-              End="2356.59090909091,123.5">
+              End="2356.59090909091,114.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.47619047619048" />
+                    End="0,7.61904761904762" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.47619047619048"
-                    Point2="0,12.4761904761905"
-                    Point3="4,12.4761904761905" />
+                    Point1="0,7.61904761904762"
+                    Point2="0,11.6190476190476"
+                    Point3="4,11.6190476190476" />
                   <mssgle:LineSegment
-                    End="2352.59090909091,12.4761904761905" />
+                    End="2352.59090909091,11.6190476190476" />
                   <mssgle:CubicBezierSegment
-                    Point1="2352.59090909091,12.4761904761905"
-                    Point2="2356.59090909091,12.4761904761905"
-                    Point3="2356.59090909091,16.4761904761905" />
+                    Point1="2352.59090909091,11.6190476190476"
+                    Point2="2356.59090909091,11.6190476190476"
+                    Point3="2356.59090909091,15.6190476190476" />
                   <mssgle:LineSegment
-                    End="2356.59090909091,123.5" />
+                    End="2356.59090909091,114.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3578,30 +3617,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="1031.54545454545,623">
+          TopLeft="877,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-45.4545454545445,129.5"
+              EndConnector="109.09090909091,120.5"
               Start="0,0"
-              End="-45.4545454545445,122">
+              End="109.09090909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,69.7024390243902" />
+                    End="0,35.1906542056075" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,69.7024390243902"
-                    Point2="0,73.7024390243902"
-                    Point3="-4,73.7024390243902" />
+                    Point1="0,35.1906542056075"
+                    Point2="0,39.1906542056075"
+                    Point3="4,39.1906542056075" />
                   <mssgle:LineSegment
-                    End="-41.4545454545445,73.7024390243902" />
+                    End="105.09090909091,39.1906542056075" />
                   <mssgle:CubicBezierSegment
-                    Point1="-41.4545454545445,73.7024390243902"
-                    Point2="-45.4545454545445,73.7024390243902"
-                    Point3="-45.4545454545445,77.7024390243902" />
+                    Point1="105.09090909091,39.1906542056075"
+                    Point2="109.09090909091,39.1906542056075"
+                    Point3="109.09090909091,43.1906542056075" />
                   <mssgle:LineSegment
-                    End="-45.4545454545445,122" />
+                    End="109.09090909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3646,30 +3685,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="1096.45454545455,623">
+          TopLeft="911,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="72.2613636363644,129.5"
+              EndConnector="257.71590909091,120.5"
               Start="0,0"
-              End="72.2613636363644,122">
+              End="257.71590909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.7024390243902" />
+                    End="0,40.0492091388401" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,57.7024390243902"
-                    Point2="0,61.7024390243902"
-                    Point3="4,61.7024390243902" />
+                    Point1="0,40.0492091388401"
+                    Point2="0,44.0492091388401"
+                    Point3="4,44.0492091388401" />
                   <mssgle:LineSegment
-                    End="68.2613636363644,61.7024390243902" />
+                    End="253.71590909091,44.0492091388401" />
                   <mssgle:CubicBezierSegment
-                    Point1="68.2613636363644,61.7024390243902"
-                    Point2="72.2613636363644,61.7024390243902"
-                    Point3="72.2613636363644,65.7024390243902" />
+                    Point1="253.71590909091,44.0492091388401"
+                    Point2="257.71590909091,44.0492091388401"
+                    Point3="257.71590909091,48.0492091388401" />
                   <mssgle:LineSegment
-                    End="72.2613636363644,122" />
+                    End="257.71590909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3680,30 +3719,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1161.36363636364,623">
+          TopLeft="945,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="190.977272727273,129.5"
+              EndConnector="407.34090909091,120.5"
               Start="0,0"
-              End="190.977272727273,122">
+              End="407.34090909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.6572551302576" />
+                    End="0,44.3598673300166" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,50.6572551302576"
-                    Point2="0,54.6572551302576"
-                    Point3="4,54.6572551302576" />
+                    Point1="0,44.3598673300166"
+                    Point2="0,48.3598673300166"
+                    Point3="4,48.3598673300166" />
                   <mssgle:LineSegment
-                    End="186.977272727273,54.6572551302576" />
+                    End="403.34090909091,48.3598673300166" />
                   <mssgle:CubicBezierSegment
-                    Point1="186.977272727273,54.6572551302576"
-                    Point2="190.977272727273,54.6572551302576"
-                    Point3="190.977272727273,58.6572551302576" />
+                    Point1="403.34090909091,48.3598673300166"
+                    Point2="407.34090909091,48.3598673300166"
+                    Point3="407.34090909091,52.3598673300166" />
                   <mssgle:LineSegment
-                    End="190.977272727273,122" />
+                    End="407.34090909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3714,30 +3753,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="1226.27272727273,623">
+          TopLeft="979,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="309.693181818183,129.5"
+              EndConnector="556.96590909091,120.5"
               Start="0,0"
-              End="309.693181818183,122">
+              End="556.96590909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.9780737372097" />
+                    End="0,48.2103610675039" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,41.9780737372097"
-                    Point2="0,45.9780737372097"
-                    Point3="4,45.9780737372097" />
+                    Point1="0,48.2103610675039"
+                    Point2="0,52.2103610675039"
+                    Point3="4,52.2103610675039" />
                   <mssgle:LineSegment
-                    End="305.693181818183,45.9780737372097" />
+                    End="552.96590909091,52.2103610675039" />
                   <mssgle:CubicBezierSegment
-                    Point1="305.693181818183,45.9780737372097"
-                    Point2="309.693181818183,45.9780737372097"
-                    Point3="309.693181818183,49.9780737372097" />
+                    Point1="552.96590909091,52.2103610675039"
+                    Point2="556.96590909091,52.2103610675039"
+                    Point3="556.96590909091,56.2103610675039" />
                   <mssgle:LineSegment
-                    End="309.693181818183,122" />
+                    End="556.96590909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3748,30 +3787,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="1291.18181818182,623">
+          TopLeft="1013,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="428.409090909092,129.5"
+              EndConnector="706.59090909091,120.5"
               Start="0,0"
-              End="428.409090909092,122">
+              End="706.59090909091,113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.0218629432298" />
+                    End="0,51.6706408345753" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.0218629432298"
-                    Point2="0,35.0218629432298"
-                    Point3="4,35.0218629432298" />
+                    Point1="0,51.6706408345753"
+                    Point2="0,55.6706408345753"
+                    Point3="4,55.6706408345753" />
                   <mssgle:LineSegment
-                    End="424.409090909092,35.0218629432298" />
+                    End="702.59090909091,55.6706408345753" />
                   <mssgle:CubicBezierSegment
-                    Point1="424.409090909092,35.0218629432298"
-                    Point2="428.409090909092,35.0218629432298"
-                    Point3="428.409090909092,39.0218629432298" />
+                    Point1="702.59090909091,55.6706408345753"
+                    Point2="706.59090909091,55.6706408345753"
+                    Point3="706.59090909091,59.6706408345753" />
                   <mssgle:LineSegment
-                    End="428.409090909092,122" />
+                    End="706.59090909091,113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3782,30 +3821,30 @@ WHERE Status &lt;&gt; 'Completed' and ExecutionPlanName = 'StagingJDE'
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="1356.09090909091,623">
+          TopLeft="1047,632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="549.500000000001,130.5"
+              EndConnector="858.59090909091,121.5"
               Start="0,0"
-              End="549.500000000001,123">
+              End="858.59090909091,114">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.9175301332206" />
+                    End="0,55.2851063829787" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16.9175301332206"
-                    Point2="0,20.9175301332206"
-                    Point3="4,20.9175301332206" />
+                    Point1="0,55.2851063829787"
+                    Point2="0,59.2851063829787"
+                    Point3="4,59.2851063829787" />
                   <mssgle:LineSegment
-                    End="545.500000000001,20.9175301332206" />
+                    End="854.59090909091,59.2851063829787" />
                   <mssgle:CubicBezierSegment
-                    Point1="545.500000000001,20.9175301332206"
-                    Point2="549.500000000001,20.9175301332206"
-                    Point3="549.500000000001,24.9175301332206" />
+                    Point1="854.59090909091,59.2851063829787"
+                    Point2="858.59090909091,59.2851063829787"
+                    Point3="858.59090909091,63.2851063829787" />
                   <mssgle:LineSegment
-                    End="549.500000000001,123" />
+                    End="858.59090909091,114" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
